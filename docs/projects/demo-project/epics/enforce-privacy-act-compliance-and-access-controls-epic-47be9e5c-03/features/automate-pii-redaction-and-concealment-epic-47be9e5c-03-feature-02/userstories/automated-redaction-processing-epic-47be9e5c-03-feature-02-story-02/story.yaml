@@ -1,0 +1,16 @@
+id: epic-47be9e5c-03-feature-02-story-02
+title: "Automated Redaction Processing"
+epic_id: epic-47be9e5c-03
+feature_id: epic-47be9e5c-03-feature-02
+role: "system"
+capability: "redact sensitive data"
+benefit: "secure information transfer"
+acceptance_criteria:
+  - "System creates a copy of the original document when redaction is initiated"
+  - "System replaces detected PII elements with black boxes or configurable replacement text"
+  - "System preserves document structure and readability after redaction"
+  - "System generates redacted version only when confidence threshold is met"
+governance_references:
+  - "sec-47be9e5c-144-5fc01bfe"
+  - "sec-47be9e5c-889-41dccc37"
+created_at: "2026-02-02T01:43:09.242Z"

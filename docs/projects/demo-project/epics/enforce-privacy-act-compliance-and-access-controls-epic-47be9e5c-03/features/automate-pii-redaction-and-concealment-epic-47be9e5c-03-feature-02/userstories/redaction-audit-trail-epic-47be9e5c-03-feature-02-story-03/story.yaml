@@ -1,0 +1,16 @@
+id: epic-47be9e5c-03-feature-02-story-03
+title: "Redaction Audit Trail"
+epic_id: epic-47be9e5c-03
+feature_id: epic-47be9e5c-03-feature-02
+role: "records manager"
+capability: "track redaction history"
+benefit: "maintain compliance records"
+acceptance_criteria:
+  - "System logs each redaction event with timestamp, document identifier, and transfer destination"
+  - "System stores reference to both original and redacted document versions"
+  - "System records the PII elements detected and their confidence scores"
+  - "System makes redaction logs searchable by date range, document, and destination"
+governance_references:
+  - "sec-47be9e5c-144-5fc01bfe"
+  - "sec-47be9e5c-182-62d0c42d"
+created_at: "2026-02-02T01:43:09.244Z"

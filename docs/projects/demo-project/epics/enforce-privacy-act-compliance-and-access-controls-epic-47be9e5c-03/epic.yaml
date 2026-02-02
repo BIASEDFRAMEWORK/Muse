@@ -1,0 +1,14 @@
+id: epic-47be9e5c-03
+title: "Enforce Privacy Act Compliance and Access Controls"
+objective: "Establish management controls to protect personnel records under the Privacy Act, limiting access to authorized personnel and ensuring proper disclosure procedures."
+success_criteria:
+  - "Access to personnel records is restricted to employees whose official duties require it"
+  - "Agencies publish required Federal Register notices for systems of records"
+  - "Social Security Numbers and personally identifiable information are properly redacted or concealed before transfers"
+governance_references:
+  - "sec-47be9e5c-52-bd339bc7"
+  - "sec-47be9e5c-70-0adf0085"
+  - "sec-47be9e5c-73-3da7331a"
+  - "sec-47be9e5c-75-5009a3e3"
+  - "sec-47be9e5c-926-8817ebdb"
+created_at: "2026-02-02T01:43:09.235Z"

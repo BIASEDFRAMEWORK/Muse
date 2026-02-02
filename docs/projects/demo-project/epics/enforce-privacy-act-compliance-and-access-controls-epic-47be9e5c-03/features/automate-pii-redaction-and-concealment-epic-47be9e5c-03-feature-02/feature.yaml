@@ -1,0 +1,19 @@
+id: epic-47be9e5c-03-feature-02
+title: "Automate PII Redaction and Concealment"
+epic_id: epic-47be9e5c-03
+description: "The system automatically detects and redacts Social Security Numbers and other personally identifiable information before any record transfer or disclosure. This capability prevents unauthorized exposure of sensitive data during information exchanges."
+acceptance_criteria:
+  - "System identifies and masks SSNs and defined PII elements in documents before external transfer"
+  - "Redaction logs document original and redacted versions with timestamp and transfer destination"
+  - "System prevents transfer when PII detection confidence falls below configured threshold"
+governance_references:
+  - "sec-47be9e5c-144-5fc01bfe"
+  - "sec-47be9e5c-182-62d0c42d"
+  - "sec-47be9e5c-193-ef19c5cd"
+  - "sec-47be9e5c-889-41dccc37"
+user_story_ids:
+  - epic-47be9e5c-03-feature-02-story-01
+  - epic-47be9e5c-03-feature-02-story-02
+  - epic-47be9e5c-03-feature-02-story-03
+  - epic-47be9e5c-03-feature-02-story-04
+created_at: "2026-02-02T01:43:09.237Z"

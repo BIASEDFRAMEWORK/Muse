@@ -1,0 +1,16 @@
+id: epic-47be9e5c-03-feature-02-story-01
+title: "PII Detection Engine"
+epic_id: epic-47be9e5c-03
+feature_id: epic-47be9e5c-03-feature-02
+role: "system"
+capability: "detect PII patterns"
+benefit: "prevent data exposure"
+acceptance_criteria:
+  - "System scans documents for Social Security Numbers using pattern matching for XXX-XX-XXXX format variations"
+  - "System identifies configurable PII elements including names, addresses, phone numbers, and dates of birth"
+  - "System calculates and returns confidence score between 0-100 for each detected PII element"
+  - "System flags documents containing detected PII elements for processing before any transfer operation"
+governance_references:
+  - "sec-47be9e5c-182-62d0c42d"
+  - "sec-47be9e5c-193-ef19c5cd"
+created_at: "2026-02-02T01:43:09.240Z"

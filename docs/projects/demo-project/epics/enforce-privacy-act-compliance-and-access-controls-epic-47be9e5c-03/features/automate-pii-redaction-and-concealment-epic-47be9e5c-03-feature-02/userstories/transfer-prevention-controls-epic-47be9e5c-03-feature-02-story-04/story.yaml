@@ -1,0 +1,16 @@
+id: epic-47be9e5c-03-feature-02-story-04
+title: "Transfer Prevention Controls"
+epic_id: epic-47be9e5c-03
+feature_id: epic-47be9e5c-03-feature-02
+role: "system"
+capability: "block unsafe transfers"
+benefit: "enforce data protection"
+acceptance_criteria:
+  - "System blocks document transfer when PII detection confidence falls below configured threshold"
+  - "System displays clear error message identifying which documents cannot be transferred"
+  - "System allows authorized users to configure confidence threshold between 70-100 percent"
+  - "System logs all blocked transfer attempts with reason and requesting user"
+governance_references:
+  - "sec-47be9e5c-193-ef19c5cd"
+  - "sec-47be9e5c-889-41dccc37"
+created_at: "2026-02-02T01:43:09.245Z"
