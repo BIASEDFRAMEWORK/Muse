@@ -8,22 +8,23 @@ source_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/
 derived_from_document_id: gov-original-document-system-of-record
 origin_markdown_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# Document Retrieval API Endpoints
+# Document Content Streaming API
 
 ## Capability
-Implement read-only REST API endpoints for document access with streaming support for large files
+Stream original document bytes through authenticated GET endpoint with content-type detection
 
 ## Implementation Notes
-- Implement GET /documents/{documentId} with HTTP range request support for streaming large files
-- Implement GET /documents/{documentId}/metadata endpoint returning JSON metadata
-- Add Content-Type, Content-Length, and Content-Disposition headers for proper file handling
-- Implement proper HTTP status codes (200, 404, 403, 500) with standardized error responses
+- Implement GET /documents/{documentId} endpoint with streaming response
+- Auto-detect MIME type from file headers and extension
+- Support range requests for large file downloads
+- Return appropriate HTTP headers (Content-Length, Content-Type, ETag)
+- Handle binary and text document formats uniformly
 - Primary delivery slice: The API exposes read-only access:.
 
 ## Acceptance Criteria
-- GET /documents/{documentId} returns original document bytes with correct MIME type
-- GET /documents/{documentId}/metadata returns valid JSON with document properties
-- API supports HTTP range requests for partial content retrieval
-- Returns 404 for non-existent documents and 403 for unauthorized access
-- Response times under 2 seconds for documents up to 10MB
+- GET /documents/{valid-id} returns 200 with original file bytes
+- Content-Type header matches actual document format
+- Large files (>10MB) stream without memory overflow
+- Range requests return 206 with correct byte ranges
+- Invalid document IDs return 404 with error message
 - Control focus for this feature: The API exposes read-only access:.

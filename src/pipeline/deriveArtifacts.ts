@@ -90,6 +90,14 @@ function storyId(featureIdValue: string, storyIndexWithinFeature: number): strin
   return `${featureIdValue}-story-${ordinal(storyIndexWithinFeature)}`
 }
 
+function promptIdFromStoryId(storyIdValue: string): string {
+  const match = storyIdValue.match(/^(.*)-story-(\d{3})$/)
+  if (match) {
+    return `${match[1]}-prompt-${match[2]}`
+  }
+  return `${storyIdValue}-prompt-001`
+}
+
 function ensureDirs(): void {
   const dirs = [
     'docs/derived/epics',
@@ -227,8 +235,8 @@ function fallbackStories(features: FeatureArtifact[], source: string): UserStory
 }
 
 function fallbackPrompts(stories: UserStoryArtifact[], source: string): AIPromptArtifact[] {
-  return stories.map((story, index) => ({
-    id: id('prompt', index),
+  return stories.map((story) => ({
+    id: promptIdFromStoryId(story.id),
     story: story.id,
     title: `Implementation Prompt for ${story.id}`,
     prompt: `Implement ${story.title}.\nContext: ${story.behavior}.\nReturn production-ready code changes, unit tests, and integration tests with explicit acceptance-criteria mapping.`,
@@ -565,13 +573,10 @@ export async function deriveArtifacts(options: DeriveArtifactsOptions): Promise<
   const seenStorySignatures = new Set<string>()
   const seenStoryTitlesGlobal = new Set<string>()
   const progressiveStoryPromptWrites = options.mode === 'demo'
-  let promptCounter = 0
 
   function buildPrompt(story: UserStoryArtifact): AIPromptArtifact {
-    const promptId = id('prompt', promptCounter)
-    promptCounter += 1
     return {
-      id: promptId,
+      id: promptIdFromStoryId(story.id),
       story: story.id,
       title: `Implementation Prompt for ${story.id}`,
       prompt: `Implement ${story.title}.\nContext: ${story.behavior}.\nReturn production-ready code changes, unit tests, and integration tests with explicit acceptance-criteria mapping.`,

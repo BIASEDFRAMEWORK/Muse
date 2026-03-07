@@ -10,20 +10,22 @@ source_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/
 derived_from_document_id: gov-original-document-system-of-record
 origin_markdown_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# As an authenticated user, I can retrieve document metadata based on my role permissions
+# As an authenticated user, I want to retrieve document content based on my role permissions
 
 ## User Story
-As a authenticated user, I want to I can access the GET /documents/{documentId}/metadata endpoint and receive metadata only for documents I have permission to view, so that I can so that I can see document information relevant to my access level without exposing restricted metadata.
+As a authenticated user, I want to I can access document content through the GET /documents/{documentId} endpoint only if my role has read permissions for that document, so that I can I can securely access documents I'm authorized to view while being prevented from accessing restricted content.
 
 ## Acceptance Criteria
-- When I make a GET request to /documents/{documentId}/metadata with valid authentication, I receive a 200 response with metadata I'm authorized to see
-- When I request metadata for a document I don't have access to, I receive a 403 Forbidden response
-- When I request metadata for a non-existent document, I receive a 404 Not Found response
-- The response only includes metadata fields that my role is permitted to access
+- GET /documents/{documentId} returns 200 with document bytes when user role has read permission
+- GET /documents/{documentId} returns 403 when user role lacks read permission
+- GET /documents/{documentId} returns 401 when user is not authenticated
+- Response includes appropriate Content-Type header based on document format
+- Document streaming works for files of various sizes
 - Outcome focus for this story: The API exposes read-only access:.
 
 ## Technical Notes
-- Implement role-based filtering of metadata fields before returning response
-- Add authorization middleware to validate user permissions against document access rules
-- Cache user role permissions to avoid database lookups on each request
+- Implement role-based authorization middleware that checks user permissions before streaming
+- Use role-document permission mapping stored in database or configuration
+- Ensure streaming implementation handles large files efficiently
+- Cache permission checks for performance optimization
 - Implementation should prioritize The API exposes read-only access:.

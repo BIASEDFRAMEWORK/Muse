@@ -11,20 +11,18 @@ origin_markdown_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs
 # Role-Based Document Access Control
 
 ## Capability
-Implement granular permission system that controls document access based on user roles and document classification levels
+Implement granular access control that restricts document retrieval based on user roles and permissions
 
 ## Implementation Notes
-- Create role hierarchy with inheritance (e.g., Admin > Manager > User)
-- Implement document classification tags (Public, Internal, Confidential, Restricted)
-- Use JWT tokens with embedded role claims for API authentication
-- Store access control lists (ACLs) in database with document-role mappings
-- Cache permission decisions in Redis for performance optimization
+- Create role hierarchy with read permissions (viewer, editor, admin)
+- Implement JWT-based authentication with role claims
+- Add middleware to validate user permissions before document access
+- Store document-to-role mappings in access control database
 - Primary delivery slice: The API exposes read-only access:.
 
 ## Acceptance Criteria
-- Users can only access documents matching their role clearance level
-- API returns 403 Forbidden for unauthorized document requests
-- Role changes reflect in document access within 5 minutes
-- System supports minimum 5 role levels and 4 classification types
-- Permission checks complete within 100ms for cached decisions
+- Users can only access documents for which they have explicit read permissions
+- API returns 403 Forbidden when user lacks document access rights
+- Role assignments can be modified without system restart
+- Permission checks complete within 100ms for authenticated requests
 - Control focus for this feature: The API exposes read-only access:.

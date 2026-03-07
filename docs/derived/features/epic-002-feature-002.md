@@ -8,23 +8,21 @@ source_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/
 derived_from_document_id: gov-original-document-system-of-record
 origin_markdown_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# Comprehensive Access Audit Trail
+# Document Access Audit Logging
 
 ## Capability
-Log and track all document access attempts with detailed metadata for compliance and security monitoring
+Track and log all document access attempts with immutable audit trail
 
 ## Implementation Notes
-- Capture user ID, document ID, timestamp, IP address, and user agent for each request
-- Log both successful access and failed authorization attempts
-- Store audit logs in append-only database table with tamper detection
-- Implement log rotation and archival policies for long-term retention
-- Provide structured JSON logging format for integration with SIEM systems
+- Log each GET request to documents endpoint with user ID, timestamp, document ID
+- Include client IP address, user agent, and success/failure status
+- Store audit logs in append-only database or write-ahead log
+- Implement structured logging format (JSON) for automated analysis
 - Primary delivery slice: The API exposes read-only access:.
 
 ## Acceptance Criteria
-- Every GET request to document endpoints generates an audit log entry
-- Audit logs include all required metadata fields without PII exposure
-- Failed access attempts are logged with failure reason codes
-- Audit data is queryable by date range, user, and document within 2 seconds
-- Log integrity verification detects any unauthorized modifications
+- Every document access attempt generates audit log entry within 50ms
+- Audit logs contain user ID, document ID, timestamp, IP address, and result
+- Audit logs are tamper-evident and cannot be modified after creation
+- Failed access attempts are logged with specific denial reason
 - Control focus for this feature: The API exposes read-only access:.

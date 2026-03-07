@@ -8,21 +8,23 @@ source_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/
 derived_from_document_id: gov-original-document-system-of-record
 origin_markdown_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# Authentication and Authorization Controls
+# Document Metadata Retrieval API
 
 ## Capability
-Implement API key-based authentication with role-based access control for document retrieval
+Retrieve structured document metadata including timestamps, file properties, and system attributes
 
 ## Implementation Notes
-- Implement API key validation middleware with configurable key rotation
-- Create role-based permissions system with read permissions per document or collection
-- Add request rate limiting per API key with configurable thresholds
-- Implement IP whitelisting support for additional security layers
+- Implement GET /documents/{documentId}/metadata endpoint
+- Return JSON with file size, creation date, modification date, checksum
+- Include document format, encoding, and validation status
+- Add system metadata like ingestion timestamp and storage location
+- Sanitize sensitive metadata fields before response
 - Primary delivery slice: The API exposes read-only access:.
 
 ## Acceptance Criteria
-- All API endpoints require valid API key in Authorization header
-- Users can only access documents they have explicit read permissions for
-- Rate limiting blocks requests exceeding 1000 calls per hour per API key
-- Invalid or expired API keys return 401 Unauthorized with standard error format
+- GET /documents/{valid-id}/metadata returns 200 with JSON metadata
+- Response includes required fields: size, created_at, modified_at, checksum
+- Document format and encoding are correctly identified
+- Invalid document IDs return 404 with structured error
+- Response time under 200ms for metadata requests
 - Control focus for this feature: The API exposes read-only access:.
