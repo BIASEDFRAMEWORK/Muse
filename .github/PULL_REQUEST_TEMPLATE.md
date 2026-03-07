@@ -1,23 +1,35 @@
 # Pull Request
 
-<!-- Please fill in the sections below before submitting the PR. Example MUSE IDs: MUSE-001, MUSE-002 -->
+<!--
+This template is shared by Web UI PRs and Muse CLI PR generation.
+Muse CLI fills placeholders like {{SUMMARY}}, {{OBJECTIVE}}, and {{TRACEABILITY}}.
+For manual PRs, replace placeholders directly.
+-->
 
 ## Summary
 
-Short description of the change (one or two sentences).
+{{SUMMARY}}
 
 ## MUSE-ID (required)
 
-MUSE-ID: MUSE-XXX or MUSE-ID: N/A
+MUSE-ID: {{MUSE_ID}}
 
-Please include a MUSE-ID referencing the related Muse story (e.g., `MUSE-001`) or `N/A` if not applicable. This helps reviewers correlate PRs with demo stories and acceptance criteria.
+Please include a MUSE-ID referencing the related Muse story (e.g., `MUSE-001`) or `N/A` if not applicable. This helps reviewers correlate PRs with acceptance criteria.
 
 **Important:** Your commit message MUST start with the MUSE-ID (e.g., `MUSE-001: describe change...`). This is enforced by CI/CD guardrails.
 
-## Details
+## Objective
 
-More details about the change, rationale, and any migration or rollout notes.
+{{OBJECTIVE}}
+
+## Traceability
+
+{{TRACEABILITY}}
+
+## Reviewer Guidance
+
+{{REVIEWER_GUIDANCE}}
 
 ## Verification
 
-How can reviewers verify this change locally? Describe any steps or commands.
+{{VERIFICATION_STEPS}}

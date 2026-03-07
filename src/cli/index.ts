@@ -69,9 +69,9 @@ program
   .action((options: { pr?: boolean }) => commitCommand(Boolean(options.pr)))
 
 program
-  .command('pr')
-  .description('Create a branch, commit generated artifacts, and open a GitHub pull request')
-  .action(() => prCommand())
+  .command('pr [prompt]')
+  .description('Create a branch, commit generated artifacts, and open a template-driven GitHub pull request')
+  .action((prompt?: string) => prCommand(prompt))
 
 program
   .command('filter-digital-content <markdown>')
