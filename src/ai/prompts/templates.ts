@@ -43,9 +43,13 @@ Feature: ${featureTitle}
 
 Requirements:
 - Stories must map to software delivery work that can be tested.
-- Include clear behaviors for engineering implementation.
+- Stories must describe system behaviors (not team tasks or persona goals).
+- Use role "system" for every story.
+- Behavior must be a concrete capability clause suitable for: "As a system, I must perform <behavior> so that governance requirements are satisfied."
+- Benefit intent must align to governance requirement satisfaction.
 - Keep stories digital-only and exclude physical/manual process requirements.
 - Include acceptance criteria and technical notes specific enough for implementation.
+- Acceptance criteria should include timestamped evidence, actor identity attribution, secure logging/storage, and automated tests.
 
 Return only a valid JSON array with fields:
 - title (string)

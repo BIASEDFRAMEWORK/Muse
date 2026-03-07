@@ -218,12 +218,13 @@ function fallbackStories(features: FeatureArtifact[], source: string): UserStory
         epic: feature.epic,
         feature: feature.id,
         title: `${feature.title} — ${slice}`,
-        role: 'platform engineer',
-        behavior: `implement ${feature.title.toLowerCase()} for the ${slice}`,
-        benefit: `satisfy governance requirements for the ${slice}`,
+        role: 'system',
+        behavior: `enforce ${feature.title.toLowerCase()} for the ${slice}`,
+        benefit: 'governance requirements are satisfied',
         acceptanceCriteria: [
-          `Behavior for the ${slice} is implemented behind automated tests with deterministic outcomes.`,
-          `Audit and security events for the ${slice} are emitted with identifiers and timestamps.`,
+          `Behavior for the ${slice} records timestamped evidence with actor identity attribution.`,
+          `Audit and security events for the ${slice} are written to secure, access-controlled logging or storage.`,
+          `Automated tests validate success, failure, and evidence-capture behavior for the ${slice}.`,
         ],
         technicalNotes: [
           `Apply least-privilege authorization checks for the ${slice}.`,
@@ -256,6 +257,22 @@ function frontMatter(data: Record<string, string>): string {
 
 function normalizeTitle(value: unknown, fallbackValue: string): string {
   return typeof value === 'string' && value.trim() ? value.trim() : fallbackValue
+}
+
+function normalizeBehaviorClause(value: unknown, fallbackValue: string): string {
+  const base = typeof value === 'string' && value.trim() ? value.trim() : fallbackValue
+  let behavior = base
+    .replace(/^as a\s+[^,]+,?\s*/i, '')
+    .replace(/^i\s+(want to|must|need to)\s+/i, '')
+    .replace(/^perform\s+/i, '')
+    .replace(/\s*so that.*$/i, '')
+    .trim()
+
+  behavior = behavior.replace(/[.\s]+$/, '').trim()
+  if (!behavior) {
+    return fallbackValue
+  }
+  return behavior
 }
 
 function normalizeList(value: unknown, fallbackValue: string[]): string[] {
@@ -630,7 +647,11 @@ export async function deriveArtifacts(options: DeriveArtifactsOptions): Promise<
 
     writeArtifact(
       storyFile,
-      `${frontMatter(storyFrontMatter)}# ${story.title}\n\n## User Story\nAs a ${story.role}, I want to ${story.behavior}, so that I can ${story.benefit}.\n\n## Acceptance Criteria\n${markdownList(story.acceptanceCriteria || ['Implementation behavior is covered by automated tests.'])}\n\n## Technical Notes\n${markdownList(story.technicalNotes || ['Use secure defaults and emit structured operational telemetry.'])}`,
+      `${frontMatter(storyFrontMatter)}# ${story.title}\n\n## User Story\nAs a system, I must perform ${normalizeBehaviorClause(story.behavior, `enforce ${story.title.toLowerCase()}`)} so that governance requirements are satisfied.\n\n## Acceptance Criteria\n${markdownList(story.acceptanceCriteria || [
+        'Behavior records timestamped evidence with actor identity attribution.',
+        'Audit events are stored in secure, access-controlled logging or storage systems.',
+        'Automated tests validate success, failure, and evidence-capture paths.',
+      ])}\n\n## Technical Notes\n${markdownList(story.technicalNotes || ['Use secure defaults and emit structured operational telemetry.'])}`,
     )
 
     const promptFile = `work-items/prompts/stories/${prompt.id}.md`
@@ -722,12 +743,16 @@ export async function deriveArtifacts(options: DeriveArtifactsOptions): Promise<
       epic: feature.epic,
       feature: feature.id,
       title: fallbackStory?.title || `${feature.title} — implementation path`,
-      role: fallbackStory?.role || 'platform engineer',
-      behavior: fallbackStory?.behavior || `implement ${feature.title.toLowerCase()} with emphasis on ${focus}`,
-      benefit: fallbackStory?.benefit || 'meet governance obligations quickly for demo',
+      role: 'system',
+      behavior: normalizeBehaviorClause(
+        fallbackStory?.behavior,
+        `enforce ${feature.title.toLowerCase()} with emphasis on ${focus}`,
+      ),
+      benefit: 'governance requirements are satisfied',
       acceptanceCriteria: normalizeList(fallbackStory?.acceptanceCriteria, [
-        `Implementation demonstrates ${focus}.`,
-        'Behavior is covered by at least one automated test path.',
+        `Implementation demonstrates ${focus} with timestamped evidence and actor identity attribution.`,
+        'Audit evidence is written to secure, access-controlled logging or storage systems.',
+        'Automated tests cover success, failure, and evidence-capture paths.',
       ]),
       technicalNotes: normalizeList(fallbackStory?.technicalNotes, [
         `Prioritize ${focus}.`,
@@ -786,12 +811,13 @@ export async function deriveArtifacts(options: DeriveArtifactsOptions): Promise<
 
     const storySeed = aiStories.slice(0, profile.storyLimitPerFeature).map((rawStory, index) => ({
       title: normalizeTitle(rawStory.title, `Story ${storyResults.length + index + 1}`),
-      role: normalizeTitle(rawStory.role, 'developer'),
-      behavior: normalizeTitle(rawStory.behavior, `implement ${feature.title.toLowerCase()}`),
-      benefit: normalizeTitle(rawStory.benefit, 'meet governance obligations'),
+      role: 'system',
+      behavior: normalizeBehaviorClause(rawStory.behavior, `enforce ${feature.title.toLowerCase()}`),
+      benefit: 'governance requirements are satisfied',
       acceptanceCriteria: normalizeList(rawStory.acceptance_criteria, [
-        'Implementation passes automated tests for success and failure paths.',
-        'Security and audit events are logged with actor, action, and timestamp.',
+        'Behavior records timestamped evidence with actor identity attribution.',
+        'Security and audit events are stored in secure, access-controlled logging or storage systems.',
+        'Automated tests validate success, failure, and evidence-capture paths.',
       ]),
       technicalNotes: normalizeList(rawStory.technical_notes, [
         `Integrate with ${feature.title} control boundaries and interfaces.`,
@@ -810,9 +836,9 @@ export async function deriveArtifacts(options: DeriveArtifactsOptions): Promise<
       }
       storySeed.push({
         title: fallbackStory.title,
-        role: fallbackStory.role,
-        behavior: fallbackStory.behavior,
-        benefit: fallbackStory.benefit,
+        role: 'system',
+        behavior: normalizeBehaviorClause(fallbackStory.behavior, `enforce ${feature.title.toLowerCase()}`),
+        benefit: 'governance requirements are satisfied',
         acceptanceCriteria: fallbackStory.acceptanceCriteria || [],
         technicalNotes: fallbackStory.technicalNotes || [],
       })
@@ -835,10 +861,13 @@ export async function deriveArtifacts(options: DeriveArtifactsOptions): Promise<
         [`Implementation should prioritize ${focus}.`],
       )
 
-      let behavior = rawStory.behavior
+      let behavior = normalizeBehaviorClause(rawStory.behavior, `enforce ${feature.title.toLowerCase()} with emphasis on ${focus}`)
       let itemSignature = signature([title, behavior, acceptanceCriteria.join(' '), technicalNotes.join(' ')])
       if (seenStorySignatures.has(itemSignature)) {
-        behavior = `${behavior} with emphasis on ${focus}`
+        behavior = normalizeBehaviorClause(
+          `${behavior} with emphasis on ${focus}`,
+          `enforce ${feature.title.toLowerCase()} with emphasis on ${focus}`,
+        )
         itemSignature = signature([title, behavior, acceptanceCriteria.join(' '), technicalNotes.join(' ')])
       }
 
@@ -847,9 +876,9 @@ export async function deriveArtifacts(options: DeriveArtifactsOptions): Promise<
         epic: feature.epic,
         feature: feature.id,
         title,
-        role: rawStory.role,
+        role: 'system',
         behavior,
-        benefit: rawStory.benefit,
+        benefit: 'governance requirements are satisfied',
         acceptanceCriteria,
         technicalNotes,
         source,
