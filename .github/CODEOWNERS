@@ -12,7 +12,6 @@ specs/features/ @dgaspard @muse-org/ai
 work-items/prompts/ @dgaspard @muse-org/ai
 docs/AI_PROMPT_IMPLEMENTATION.md @dgaspard @muse-org/ai
 docs/FEATURE_GENERATION_IMPLEMENTATION.md @dgaspard @muse-org/ai
-docs/FRONTEND_FEATURE_GENERATION_IMPLEMENTATION.md @dgaspard @muse-org/ai
 docs/governance/ai-derivation-guardrails.md @dgaspard @muse-org/ai
 
 # Security & Compliance

@@ -5,6 +5,8 @@ on:
     branches: [ main ]
   push:
     branches: [ main ]
+  schedule:
+    - cron: '0 3 * * 1'
 
 permissions:
   contents: read
@@ -13,7 +15,7 @@ permissions:
 
 jobs:
   dependency-review:
-    name: Dependency Review
+    name: dependency-review
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     permissions:
@@ -31,13 +33,13 @@ jobs:
           fail-on-severity: critical
           allow-licenses: 'MIT,Apache-2.0,BSD-3-Clause,BSD-2-Clause,CC-BY-4.0,ISC,0BSD'
           allow-dependencies-licenses: 'pkg:npm/@aws-sdk/crc64-nvme'
-          # CC-BY-4.0: caniuse-lite (data package from Next.js, browserslist)
+          # CC-BY-4.0: caniuse-lite (data package used by browserslist)
           # ISC: common permissive license for npm packages
           # 0BSD: AWS SDK packages use this license
           # AWS SDK packages are Apache-2.0 but may have detection issues
 
   codeql:
-    name: CodeQL
+    name: codeql
     runs-on: ubuntu-latest
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository)
     permissions:

@@ -1,7 +1,7 @@
 # Pull Request
 
 <!--
-This template is shared by Web UI PRs and Muse CLI PR generation.
+This template is shared by repository PRs and Muse CLI PR generation.
 Muse CLI fills placeholders like {{SUMMARY}}, {{OBJECTIVE}}, and {{TRACEABILITY}}.
 For manual PRs, replace placeholders directly.
 -->
