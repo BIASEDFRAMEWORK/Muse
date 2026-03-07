@@ -1,0 +1,103 @@
+name: Hardening Drift Check
+
+on:
+  schedule:
+    - cron: '0 5 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-hardening:
+    name: verify-hardening
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify repository hardening settings
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const failures = [];
+
+            const { data: repository } = await github.rest.repos.get({ owner, repo });
+            const sa = repository.security_and_analysis || {};
+
+            if (sa.secret_scanning?.status !== 'enabled') {
+              failures.push(`secret_scanning is ${sa.secret_scanning?.status || 'missing'}`);
+            }
+            if (sa.secret_scanning_push_protection?.status !== 'enabled') {
+              failures.push(`secret_scanning_push_protection is ${sa.secret_scanning_push_protection?.status || 'missing'}`);
+            }
+            if (sa.dependabot_security_updates?.status !== 'enabled') {
+              failures.push(`dependabot_security_updates is ${sa.dependabot_security_updates?.status || 'missing'}`);
+            }
+            if (sa.advanced_security && sa.advanced_security.status !== 'enabled') {
+              failures.push(`advanced_security is ${sa.advanced_security.status || 'missing'}`);
+            }
+            if (!repository.allow_auto_merge) {
+              failures.push('allow_auto_merge is false (required for merge queue readiness)');
+            }
+
+            try {
+              const { data: protection } = await github.rest.repos.getBranchProtection({
+                owner,
+                repo,
+                branch: 'main'
+              });
+
+              if (!protection.required_pull_request_reviews) {
+                failures.push('required_pull_request_reviews is not configured');
+              }
+
+              if (protection.required_pull_request_reviews?.required_approving_review_count < 1) {
+                failures.push('required_approving_review_count must be >= 1');
+              }
+
+              if (!protection.required_pull_request_reviews?.dismiss_stale_reviews) {
+                failures.push('dismiss_stale_reviews is not enabled');
+              }
+
+              if (!protection.required_pull_request_reviews?.require_code_owner_reviews) {
+                failures.push('require_code_owner_reviews is not enabled');
+              }
+
+              if (!protection.required_status_checks?.strict) {
+                failures.push('required_status_checks.strict is not true');
+              }
+
+              if (!protection.required_conversation_resolution?.enabled) {
+                failures.push('required_conversation_resolution is not enabled');
+              }
+
+              if (!protection.enforce_admins?.enabled) {
+                failures.push('enforce_admins is not enabled');
+              }
+
+              if (protection.allow_force_pushes?.enabled) {
+                failures.push('allow_force_pushes must be disabled');
+              }
+
+              if (protection.allow_deletions?.enabled) {
+                failures.push('allow_deletions must be disabled');
+              }
+
+              const expectedChecks = new Set(['build', 'cli-tests', 'traceability', 'actionlint', 'npm-audit']);
+              const actualChecks = new Set((protection.required_status_checks?.contexts || []).map(String));
+
+              for (const check of expectedChecks) {
+                if (!actualChecks.has(check)) {
+                  failures.push(`missing required status check: ${check}`);
+                }
+              }
+            } catch (error) {
+              failures.push(`unable to read main branch protection: ${error.message}`);
+            }
+
+            if (failures.length > 0) {
+              core.setFailed(`Hardening drift detected:\n- ${failures.join('\n- ')}`);
+              return;
+            }
+
+            core.info('Hardening settings match expected baseline.');
