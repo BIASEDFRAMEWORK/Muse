@@ -19,7 +19,11 @@ program.name('muse').description('Muse CLI: governance-to-engineering artifact p
 
 program.command('init').description('Create muse.yaml').action(() => initCommand())
 
-program.command('apply').description('Apply the declarative muse.yaml pipeline').action(() => applyCommand())
+program
+  .command('apply')
+  .description('Apply the declarative muse.yaml pipeline')
+  .option('--fast', 'use demo-optimized faster generation mode')
+  .action((options: { fast?: boolean }) => applyCommand(options))
 
 program
   .command('convertMD <file>')
