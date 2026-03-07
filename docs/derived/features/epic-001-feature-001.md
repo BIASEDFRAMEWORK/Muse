@@ -1,25 +1,20 @@
 ---
 id: epic-001-feature-001
 epic: epic-001
-source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/Digital System Audit Logging and Governance Policy.digital.md
+source: /home/runner/work/Muse/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# Real-time Log Ingestion and Forwarding
+# Access Control and Authorization — Authorization enforcement
 
 ## Capability
-Automated collection and forwarding of audit logs from distributed systems to centralized storage with structured format validation
+Implement measurable controls supporting access control and authorization with a focus on authorization enforcement.
 
 ## Implementation Notes
-- Deploy log agents on all system nodes to capture local audit events
-- Implement buffering and retry mechanisms to handle network interruptions
-- Validate incoming logs against predefined schema before storage
-- Support multiple input formats including JSON, syslog, and custom application logs
-- Provide client SDKs for applications to emit structured audit events
-- Primary delivery slice: docs/derived/governance/Digital System Audit Logging and Governance Policy.md.
+- Expose service boundaries for authorization enforcement with explicit interfaces.
+- Capture operational telemetry required for authorization enforcement.
+- Primary delivery slice: The API exposes read-only access:.
 
 ## Acceptance Criteria
-- Log ingestion latency is under 30 seconds for 99% of events
-- System maintains 99.9% uptime for log collection services
-- Invalid log formats are rejected with detailed error messages
-- All required audit fields (timestamp, event ID, user identity, action, resource, outcome) are validated on ingestion
-- Failed log delivery attempts are retried with exponential backoff up to 3 times
-- Control focus for this feature: docs/derived/governance/Digital System Audit Logging and Governance Policy.md.
+- Given required authorization enforcement rules, protected operations enforce policy correctly.
+- Given violations in authorization enforcement, requests are blocked and evidence is recorded.
+- Automated tests cover success, failure, and observability for authorization enforcement.
+- Control focus for this feature: The API exposes read-only access:.

@@ -1,19 +1,16 @@
 ---
 id: prompt-003
-story: epic-001-feature-001-story-003
-source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/Digital System Audit Logging and Governance Policy.digital.md
+story: epic-001-feature-002-story-001
+source: /home/runner/work/Muse/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# Implementation Prompt for epic-001-feature-001-story-003
+# Implementation Prompt for epic-001-feature-002-story-001
 
-Implement Configure automated monitoring rules for suspicious activities.
-Context: I want to define automated detection rules that analyze incoming audit logs and generate alerts for security incidents.
+Implement Access Control and Authorization — Audit telemetry and evidence capture — implementation path.
+Context: implement access control and authorization — audit telemetry and evidence capture for the implementation path.
 Return production-ready code changes, unit tests, and integration tests with explicit acceptance-criteria mapping.
 
 ## Implementation Checklist
-- Detection rules identify repeated failed authentication attempts within time windows
-- System alerts on administrative privilege changes and unusual access patterns
-- Rules detect access attempts from unexpected geographic locations
-- Alert notifications are sent to security operations team via configured channels
-- Detection rules can be updated and deployed without system downtime
-- Outcome focus for this story: Audience: Engineering, Security, and Platform Operations.
-- Implementation outcome is unique to epic-001-feature-001-story-003 (Configure automated monitoring rules for suspicious activities).
+- Behavior for the implementation path is implemented behind automated tests with deterministic outcomes.
+- Audit and security events for the implementation path are emitted with identifiers and timestamps.
+- Outcome focus for this story: The API exposes read-only access:.
+- Implementation outcome is unique to epic-001-feature-002-story-001 (Access Control and Authorization — Audit telemetry and evidence capture — implementation path).

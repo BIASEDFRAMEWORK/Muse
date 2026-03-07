@@ -1,22 +1,16 @@
 ---
 id: epic-003
-source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/Digital System Audit Logging and Governance Policy.digital.md
+source: /home/runner/work/Muse/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# Identity-Aware API Request Logging Framework
+# Retrieval (Read-only)
 
 ## Objective
-Develop a standardized API logging framework that captures authenticated requests with caller identity, endpoint usage, and response outcomes to support security investigations and compliance auditing.
+Deliver retrieval (read-only) capabilities from governance requirements.
 
 ## Outcomes
-- All internal and external APIs log requests with standardized fields
-- Caller identity context preserved through service-to-service calls
-- Request/response correlation enables complete transaction tracing
-- Performance impact remains under 5ms latency overhead per request
-- Automated compliance verification confirms logging coverage across API endpoints
-- Primary outcome focus: Audience: Engineering, Security, and Platform Operations.
+- Engineering teams can implement retrieval (read-only) with clear scope and ownership.
+- Controls are observable through logs, audits, and repeatable checks.
+- Primary outcome focus: The API exposes read-only access:.
 
 ## Non-Goals
-- API rate limiting or throttling functionality
-- Request payload logging or sensitive data capture
-- API gateway or reverse proxy implementation
-- Business metrics or usage analytics collection
+- Physical-only controls and manual paper handling processes are out of scope.

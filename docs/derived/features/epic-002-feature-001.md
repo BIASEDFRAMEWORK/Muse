@@ -1,24 +1,20 @@
 ---
 id: epic-002-feature-001
 epic: epic-002
-source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/Digital System Audit Logging and Governance Policy.digital.md
+source: /home/runner/work/Muse/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# Real-time Security Event Detection Engine
+# Service and API Governance — Authorization enforcement
 
 ## Capability
-Automated analysis of audit logs to identify suspicious activities and security anomalies using rule-based detection and behavioral analytics
+Implement measurable controls supporting service and api governance with a focus on authorization enforcement.
 
 ## Implementation Notes
-- Implement stream processing engine to consume logs from centralized logging platform in real-time
-- Create configurable detection rules for failed authentication patterns, privilege escalation, and unusual access patterns
-- Develop baseline behavioral models for normal user and system activity
-- Integrate with SIEM platform for event correlation and enrichment
-- Primary delivery slice: This policy defines the required governance controls for digital systems that process, store, or.
+- Expose service boundaries for authorization enforcement with explicit interfaces.
+- Capture operational telemetry required for authorization enforcement.
+- Primary delivery slice: The API exposes read-only access:.
 
 ## Acceptance Criteria
-- System processes audit logs with latency under 30 seconds from log generation
-- Detection engine identifies repeated failed authentication attempts (5+ failures within 15 minutes)
-- System detects administrative privilege changes within 60 seconds of occurrence
-- Behavioral analytics flag access from new geographic locations or unusual time patterns
-- Detection rules can be updated without system restart
-- Control focus for this feature: This policy defines the required governance controls for digital systems that process, store, or.
+- Given required authorization enforcement rules, protected operations enforce policy correctly.
+- Given violations in authorization enforcement, requests are blocked and evidence is recorded.
+- Automated tests cover success, failure, and observability for authorization enforcement.
+- Control focus for this feature: The API exposes read-only access:.

@@ -1,22 +1,16 @@
 ---
 id: epic-001
-source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/Digital System Audit Logging and Governance Policy.digital.md
+source: /home/runner/work/Muse/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# Centralized Audit Log Management Platform
+# Access Control and Authorization
 
 ## Objective
-Build a centralized logging platform that ingests, stores, and manages audit logs from all digital systems with real-time forwarding, retention policies, and immutable storage capabilities.
+Deliver access control and authorization capabilities from governance requirements.
 
 ## Outcomes
-- All systems forward logs to centralized platform in near real-time
-- Automated retention policies enforce minimum compliance periods
-- Immutable log storage prevents unauthorized modification or deletion
-- Structured JSON log format standardized across all systems
-- Log ingestion APIs support high-volume, low-latency data streams
-- Primary outcome focus: docs/derived/governance/Digital System Audit Logging and Governance Policy.md.
+- Engineering teams can implement access control and authorization with clear scope and ownership.
+- Controls are observable through logs, audits, and repeatable checks.
+- Primary outcome focus: The API exposes read-only access:.
 
 ## Non-Goals
-- Physical log storage or paper-based audit trails
-- Manual log collection or periodic batch uploads
-- Log analysis or alerting functionality within this platform
-- Application-specific logging libraries or SDKs
+- Physical-only controls and manual paper handling processes are out of scope.

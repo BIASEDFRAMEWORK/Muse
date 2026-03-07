@@ -1,19 +1,16 @@
 ---
 id: prompt-011
-story: epic-002-feature-001-story-002
-source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/Digital System Audit Logging and Governance Policy.digital.md
+story: epic-003-feature-002-story-001
+source: /home/runner/work/Muse/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# Implementation Prompt for epic-002-feature-001-story-002
+# Implementation Prompt for epic-003-feature-002-story-001
 
-Implement Real-time Detection of Administrative Privilege Changes.
-Context: I want to receive immediate alerts when administrative privileges are granted or modified.
+Implement Retrieval (Read-only) — Audit telemetry and evidence capture — implementation path.
+Context: implement retrieval (read-only) — audit telemetry and evidence capture for the implementation path.
 Return production-ready code changes, unit tests, and integration tests with explicit acceptance-criteria mapping.
 
 ## Implementation Checklist
-- System detects role assignments that include administrative privileges
-- System detects permission changes that grant elevated access to sensitive resources
-- Alert is generated within 10 seconds of privilege change event
-- Alert includes user identity, privilege granted, grantor identity, and affected resources
-- System maintains baseline of normal administrative activity patterns
-- Outcome focus for this story: The system must ensure that all logs are timestamped and include sufficient context to support.
-- Implementation outcome is unique to epic-002-feature-001-story-002 (Real-time Detection of Administrative Privilege Changes).
+- Behavior for the implementation path is implemented behind automated tests with deterministic outcomes.
+- Audit and security events for the implementation path are emitted with identifiers and timestamps.
+- Outcome focus for this story: The API exposes read-only access:.
+- Implementation outcome is unique to epic-003-feature-002-story-001 (Retrieval (Read-only) — Audit telemetry and evidence capture — implementation path).

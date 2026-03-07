@@ -1,19 +1,16 @@
 ---
 id: prompt-006
-story: epic-001-feature-002-story-003
-source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/Digital System Audit Logging and Governance Policy.digital.md
+story: epic-002-feature-001-story-002
+source: /home/runner/work/Muse/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# Implementation Prompt for epic-001-feature-002-story-003
+# Implementation Prompt for epic-002-feature-001-story-002
 
-Implement Encrypt audit logs in transit and at rest.
-Context: I want to implement end-to-end encryption for audit log data during transmission and storage.
+Implement Service and API Governance — Authorization enforcement — operational evidence path.
+Context: implement service and api governance — authorization enforcement for the operational evidence path.
 Return production-ready code changes, unit tests, and integration tests with explicit acceptance-criteria mapping.
 
 ## Implementation Checklist
-- All audit log transmissions use TLS 1.3 or higher with certificate validation
-- Stored audit logs are encrypted using AES-256 or equivalent encryption
-- Encryption keys are managed through a secure key management service
-- Key rotation is automated and does not impact log accessibility
-- Decryption is only possible through authorized service interfaces
-- Outcome focus for this story: monitoring, and security controls to support accountability, incident investigation, and regulatory.
-- Implementation outcome is unique to epic-001-feature-002-story-003 (Encrypt audit logs in transit and at rest).
+- Behavior for the operational evidence path is implemented behind automated tests with deterministic outcomes.
+- Audit and security events for the operational evidence path are emitted with identifiers and timestamps.
+- Outcome focus for this story: The API exposes read-only access:.
+- Implementation outcome is unique to epic-002-feature-001-story-002 (Service and API Governance — Authorization enforcement — operational evidence path).

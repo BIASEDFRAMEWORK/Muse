@@ -1,24 +1,20 @@
 ---
 id: epic-002-feature-002
 epic: epic-002
-source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/Digital System Audit Logging and Governance Policy.digital.md
+source: /home/runner/work/Muse/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# Multi-channel Alert Distribution System
+# Service and API Governance — Audit telemetry and evidence capture
 
 ## Capability
-Automated delivery of security alerts to appropriate teams through multiple communication channels with escalation workflows
+Implement measurable controls supporting service and api governance with a focus on audit telemetry and evidence capture.
 
 ## Implementation Notes
-- Configure alert routing based on event severity, affected system, and on-call schedules
-- Implement multiple notification channels including email, Slack, PagerDuty, and webhook integrations
-- Create escalation timers that promote alerts if not acknowledged within defined timeframes
-- Support alert suppression and grouping to prevent notification fatigue
-- Primary delivery slice: The goal of this policy is to ensure that digital systems implement sufficient logging, auditing,.
+- Expose service boundaries for audit telemetry and evidence capture with explicit interfaces.
+- Capture operational telemetry required for audit telemetry and evidence capture.
+- Primary delivery slice: The API exposes read-only access:.
 
 ## Acceptance Criteria
-- Critical security events trigger immediate notifications within 2 minutes
-- Alert routing correctly identifies primary and secondary on-call engineers
-- Escalation workflow promotes unacknowledged critical alerts after 15 minutes
-- Alert grouping reduces duplicate notifications for related events by 80%
-- System maintains 99.9% availability for alert delivery
-- Control focus for this feature: The goal of this policy is to ensure that digital systems implement sufficient logging, auditing,.
+- Given required audit telemetry and evidence capture rules, protected operations enforce policy correctly.
+- Given violations in audit telemetry and evidence capture, requests are blocked and evidence is recorded.
+- Automated tests cover success, failure, and observability for audit telemetry and evidence capture.
+- Control focus for this feature: The API exposes read-only access:.

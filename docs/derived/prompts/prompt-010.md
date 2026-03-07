@@ -1,19 +1,16 @@
 ---
 id: prompt-010
-story: epic-002-feature-001-story-001
-source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/Digital System Audit Logging and Governance Policy.digital.md
+story: epic-003-feature-001-story-002
+source: /home/runner/work/Muse/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# Implementation Prompt for epic-002-feature-001-story-001
+# Implementation Prompt for epic-003-feature-001-story-002
 
-Implement Automated Security Event Detection for Failed Authentication Attempts.
-Context: I want the system to automatically detect and alert on repeated failed authentication attempts.
+Implement Retrieval (Read-only) — Authorization enforcement — operational evidence path.
+Context: implement retrieval (read-only) — authorization enforcement for the operational evidence path.
 Return production-ready code changes, unit tests, and integration tests with explicit acceptance-criteria mapping.
 
 ## Implementation Checklist
-- System detects 5 or more failed authentication attempts from the same IP within 5 minutes
-- System detects 10 or more failed authentication attempts for the same user account within 15 minutes
-- Alert is generated and sent to security operations team within 30 seconds of detection
-- Alert includes source IP, target account, number of attempts, and time window
-- Detection rules can be configured with custom thresholds and time windows
-- Outcome focus for this story: Audit logging must occur automatically and must not rely on manual intervention..
-- Implementation outcome is unique to epic-002-feature-001-story-001 (Automated Security Event Detection for Failed Authentication Attempts).
+- Behavior for the operational evidence path is implemented behind automated tests with deterministic outcomes.
+- Audit and security events for the operational evidence path are emitted with identifiers and timestamps.
+- Outcome focus for this story: The API exposes read-only access:.
+- Implementation outcome is unique to epic-003-feature-001-story-002 (Retrieval (Read-only) — Authorization enforcement — operational evidence path).

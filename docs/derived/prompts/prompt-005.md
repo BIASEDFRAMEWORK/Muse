@@ -1,19 +1,16 @@
 ---
 id: prompt-005
-story: epic-001-feature-002-story-002
-source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/Digital System Audit Logging and Governance Policy.digital.md
+story: epic-002-feature-001-story-001
+source: /home/runner/work/Muse/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# Implementation Prompt for epic-001-feature-002-story-002
+# Implementation Prompt for epic-002-feature-001-story-001
 
-Implement Prevent unauthorized deletion of stored audit logs.
-Context: I want to implement access controls and retention policies that prevent unauthorized deletion of audit logs.
+Implement Service and API Governance — Authorization enforcement — implementation path.
+Context: implement service and api governance — authorization enforcement for the implementation path.
 Return production-ready code changes, unit tests, and integration tests with explicit acceptance-criteria mapping.
 
 ## Implementation Checklist
-- Only authorized system processes can write to audit log storage
-- No user accounts have delete permissions on stored audit logs
-- Retention policies are enforced automatically and cannot be bypassed
-- Deletion attempts are logged with full context including identity and timestamp
-- Administrative override capabilities are logged and require multi-factor authentication
-- Outcome focus for this story: The goal of this policy is to ensure that digital systems implement sufficient logging, auditing,.
-- Implementation outcome is unique to epic-001-feature-002-story-002 (Prevent unauthorized deletion of stored audit logs).
+- Behavior for the implementation path is implemented behind automated tests with deterministic outcomes.
+- Audit and security events for the implementation path are emitted with identifiers and timestamps.
+- Outcome focus for this story: The API exposes read-only access:.
+- Implementation outcome is unique to epic-002-feature-001-story-001 (Service and API Governance — Authorization enforcement — implementation path).

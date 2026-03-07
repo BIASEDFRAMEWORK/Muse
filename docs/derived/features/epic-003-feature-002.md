@@ -1,23 +1,20 @@
 ---
 id: epic-003-feature-002
 epic: epic-003
-source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/Digital System Audit Logging and Governance Policy.digital.md
+source: /home/runner/work/Muse/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# Structured API Request Logging
+# Retrieval (Read-only) — Audit telemetry and evidence capture
 
 ## Capability
-Generate JSON-formatted audit logs for all API requests with standardized fields for monitoring system consumption
+Implement measurable controls supporting retrieval (read-only) with a focus on audit telemetry and evidence capture.
 
 ## Implementation Notes
-- Implement request/response logging middleware with configurable field inclusion
-- Structure logs with timestamp, event_id, endpoint, method, status_code, and response_time
-- Include request payload fingerprints for sensitive endpoints without logging actual data
-- Support log sampling configuration to manage volume for high-traffic endpoints
-- Primary delivery slice: All digital systems must generate audit logs for security-relevant events..
+- Expose service boundaries for audit telemetry and evidence capture with explicit interfaces.
+- Capture operational telemetry required for audit telemetry and evidence capture.
+- Primary delivery slice: The API exposes read-only access:.
 
 ## Acceptance Criteria
-- All API requests generate structured JSON logs with required audit fields
-- Logs include unique event identifiers for correlation across distributed systems
-- Sensitive request data is fingerprinted rather than logged in plaintext
-- Log format validates against predefined JSON schema for SIEM integration
-- Control focus for this feature: All digital systems must generate audit logs for security-relevant events..
+- Given required audit telemetry and evidence capture rules, protected operations enforce policy correctly.
+- Given violations in audit telemetry and evidence capture, requests are blocked and evidence is recorded.
+- Automated tests cover success, failure, and observability for audit telemetry and evidence capture.
+- Control focus for this feature: The API exposes read-only access:.

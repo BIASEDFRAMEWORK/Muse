@@ -17,5 +17,5 @@
 - Use a declarative muse.yaml pipeline for repeatable execution.
 
 ## Source Context
-- docs/governance/recguide2011__1_.md
-- Input size: 206941 characters
+- /home/runner/work/Muse/Muse/docs/derived/governance/original-document-system-of-record.digital.md
+- Input size: 501 characters

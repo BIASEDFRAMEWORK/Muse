@@ -1,19 +1,16 @@
 ---
 id: prompt-008
-story: epic-001-feature-003-story-002
-source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/Digital System Audit Logging and Governance Policy.digital.md
+story: epic-002-feature-002-story-002
+source: /home/runner/work/Muse/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# Implementation Prompt for epic-001-feature-003-story-002
+# Implementation Prompt for epic-002-feature-002-story-002
 
-Implement Security analysts access comprehensive audit logs across all systems.
-Context: I want to query audit logs from all organizational systems.
+Implement Service and API Governance — Audit telemetry and evidence capture — operational evidence path.
+Context: implement service and api governance — audit telemetry and evidence capture for the operational evidence path.
 Return production-ready code changes, unit tests, and integration tests with explicit acceptance-criteria mapping.
 
 ## Implementation Checklist
-- Security analysts can access logs from all systems in the organization
-- Log queries can span multiple systems and time ranges
-- Results include correlation identifiers for cross-system analysis
-- Advanced filtering and search capabilities are available
-- Export functionality allows data extraction for SIEM integration
-- Outcome focus for this story: All digital systems must generate audit logs for security-relevant events..
-- Implementation outcome is unique to epic-001-feature-003-story-002 (Security analysts access comprehensive audit logs across all systems).
+- Behavior for the operational evidence path is implemented behind automated tests with deterministic outcomes.
+- Audit and security events for the operational evidence path are emitted with identifiers and timestamps.
+- Outcome focus for this story: The API exposes read-only access:.
+- Implementation outcome is unique to epic-002-feature-002-story-002 (Service and API Governance — Audit telemetry and evidence capture — operational evidence path).

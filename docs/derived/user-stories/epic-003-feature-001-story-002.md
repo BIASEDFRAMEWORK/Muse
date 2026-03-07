@@ -2,25 +2,19 @@
 id: epic-003-feature-001-story-002
 epic: epic-003
 feature: epic-003-feature-001
-source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/Digital System Audit Logging and Governance Policy.digital.md
+source: /home/runner/work/Muse/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# Propagate user identity context across microservices
+# Retrieval (Read-only) — Authorization enforcement — operational evidence path
 
 ## User Story
-As a distributed system, I want to maintain and forward user identity context through service-to-service calls, so that I can so that downstream service actions can be attributed to the original user.
+As a platform engineer, I want to implement retrieval (read-only) — authorization enforcement for the operational evidence path, so that I can satisfy governance requirements for the operational evidence path.
 
 ## Acceptance Criteria
-- User identity context is passed in request headers between services
-- Context includes both end-user identity and immediate calling service identity
-- Identity propagation works across HTTP, gRPC, and message queue boundaries
-- Context is automatically included without manual developer intervention
-- Failed identity propagation generates warning logs
-- Outcome focus for this story: This policy defines the required governance controls for digital systems that process, store, or.
+- Behavior for the operational evidence path is implemented behind automated tests with deterministic outcomes.
+- Audit and security events for the operational evidence path are emitted with identifiers and timestamps.
+- Outcome focus for this story: The API exposes read-only access:.
 
 ## Technical Notes
-- Implement correlation ID pattern with identity context payload
-- Use standardized headers (e.g., X-User-ID, X-Service-ID) across all services
-- Integrate with service mesh or API gateway for automatic header injection
-- Validate and sanitize identity context at service boundaries
-- Implement fallback behavior when identity context is missing
-- Implementation should prioritize This policy defines the required governance controls for digital systems that process, store, or.
+- Apply least-privilege authorization checks for the operational evidence path.
+- Ensure structured logs for the operational evidence path are queryable for compliance evidence.
+- Implementation should prioritize The API exposes read-only access:.

@@ -2,25 +2,19 @@
 id: epic-003-feature-002-story-002
 epic: epic-003
 feature: epic-003-feature-002
-source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/Digital System Audit Logging and Governance Policy.digital.md
+source: /home/runner/work/Muse/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# Centralized Log Forwarding Integration
+# Retrieval (Read-only) — Audit telemetry and evidence capture — operational evidence path
 
 ## User Story
-As a platform engineer, I want to configure automatic forwarding of API audit logs to centralized logging platform, so that I can ensure audit logs are centrally stored and protected for compliance and investigation.
+As a platform engineer, I want to implement retrieval (read-only) — audit telemetry and evidence capture for the operational evidence path, so that I can satisfy governance requirements for the operational evidence path.
 
 ## Acceptance Criteria
-- API logs are forwarded to centralized log management platform in near real-time (< 30 seconds)
-- Log forwarding continues to function during network interruptions with retry logic
-- Forwarded logs maintain original structure and all required audit fields
-- Local log buffering prevents log loss during temporary connectivity issues
-- Log forwarding configuration is automated and doesn't require manual setup
-- Outcome focus for this story: All software systems developed or operated by the organization must implement the controls.
+- Behavior for the operational evidence path is implemented behind automated tests with deterministic outcomes.
+- Audit and security events for the operational evidence path are emitted with identifiers and timestamps.
+- Outcome focus for this story: The API exposes read-only access:.
 
 ## Technical Notes
-- Configure log shipper (Filebeat, Fluentd, or similar) to forward JSON logs to centralized platform
-- Implement exponential backoff retry logic for failed log forwarding attempts
-- Set up log rotation and local retention (24-48 hours) to prevent disk space issues
-- Use secure transport (TLS) for log forwarding to protect logs in transit
-- Configure log parsing rules on centralized platform to properly index structured API logs
-- Implementation should prioritize All software systems developed or operated by the organization must implement the controls.
+- Apply least-privilege authorization checks for the operational evidence path.
+- Ensure structured logs for the operational evidence path are queryable for compliance evidence.
+- Implementation should prioritize The API exposes read-only access:.

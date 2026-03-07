@@ -1,25 +1,20 @@
 ---
 id: epic-001-feature-002
 epic: epic-001
-source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/Digital System Audit Logging and Governance Policy.digital.md
+source: /home/runner/work/Muse/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# Immutable Audit Log Storage
+# Access Control and Authorization — Audit telemetry and evidence capture
 
 ## Capability
-Write-once storage system with cryptographic integrity verification to prevent unauthorized modification or deletion of audit records
+Implement measurable controls supporting access control and authorization with a focus on audit telemetry and evidence capture.
 
 ## Implementation Notes
-- Implement append-only storage backend with cryptographic hashing
-- Generate merkle tree signatures for log batches to detect tampering
-- Store integrity checksums separately from log data
-- Implement automated integrity verification scans every 24 hours
-- Provide tamper-evident sealing for completed log segments
-- Primary delivery slice: Digital System Audit Logging and.
+- Expose service boundaries for audit telemetry and evidence capture with explicit interfaces.
+- Capture operational telemetry required for audit telemetry and evidence capture.
+- Primary delivery slice: The API exposes read-only access:.
 
 ## Acceptance Criteria
-- Stored logs cannot be modified or deleted through any API endpoint
-- Integrity verification detects any unauthorized changes within 24 hours
-- System generates cryptographic proof of log authenticity on demand
-- Failed integrity checks trigger immediate security alerts
-- Log retention periods are enforced automatically without manual intervention
-- Control focus for this feature: Digital System Audit Logging and.
+- Given required audit telemetry and evidence capture rules, protected operations enforce policy correctly.
+- Given violations in audit telemetry and evidence capture, requests are blocked and evidence is recorded.
+- Automated tests cover success, failure, and observability for audit telemetry and evidence capture.
+- Control focus for this feature: The API exposes read-only access:.
