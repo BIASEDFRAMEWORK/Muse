@@ -100,10 +100,10 @@ function promptIdFromStoryId(storyIdValue: string): string {
 
 function ensureDirs(): void {
   const dirs = [
-    'docs/derived/epics',
-    'docs/derived/features',
-    'docs/derived/user-stories',
-    'docs/derived/prompts',
+    'specs/epics',
+    'specs/capabilities',
+    'specs/stories',
+    'prompts/stories',
   ]
   for (const directory of dirs) {
     const absoluteDir = path.resolve(directory)
@@ -445,7 +445,7 @@ export async function deriveArtifacts(options: DeriveArtifactsOptions): Promise<
   }
 
   for (const epic of epics) {
-    const file = `docs/derived/epics/${epic.id}.md`
+    const file = `specs/epics/${epic.id}.md`
     const epicFrontMatter = {
       id: epic.id,
       epic_id: epic.id,
@@ -549,7 +549,7 @@ export async function deriveArtifacts(options: DeriveArtifactsOptions): Promise<
       })
 
       const createdFeature = featureResults[featureResults.length - 1]
-      const featureFile = `docs/derived/features/${createdFeature.id}.md`
+      const featureFile = `specs/capabilities/${createdFeature.id}.md`
       const featureFrontMatter = {
         id: createdFeature.id,
         feature_id: createdFeature.id,
@@ -593,7 +593,7 @@ export async function deriveArtifacts(options: DeriveArtifactsOptions): Promise<
   }
 
   function writeStoryAndPrompt(story: UserStoryArtifact, prompt: AIPromptArtifact): void {
-    const storyFile = `docs/derived/user-stories/${story.id}.md`
+    const storyFile = `specs/stories/${story.id}.md`
     const storyFrontMatter = {
       id: story.id,
       story_id: story.id,
@@ -612,7 +612,7 @@ export async function deriveArtifacts(options: DeriveArtifactsOptions): Promise<
       `${frontMatter(storyFrontMatter)}# ${story.title}\n\n## User Story\nAs a ${story.role}, I want to ${story.behavior}, so that I can ${story.benefit}.\n\n## Acceptance Criteria\n${markdownList(story.acceptanceCriteria || ['Implementation behavior is covered by automated tests.'])}\n\n## Technical Notes\n${markdownList(story.technicalNotes || ['Use secure defaults and emit structured operational telemetry.'])}`,
     )
 
-    const promptFile = `docs/derived/prompts/${prompt.id}.md`
+    const promptFile = `prompts/stories/${prompt.id}.md`
     const requiredChanges = [
       `Implement ${story.title}.`,
       ...normalizeList(story.technicalNotes, [
@@ -647,7 +647,7 @@ export async function deriveArtifacts(options: DeriveArtifactsOptions): Promise<
       '## Repo Context',
       markdownList([
         'Primary code paths: src/cli/, src/pipeline/, src/config/',
-        'Generated artifacts: docs/derived/epics/, docs/derived/features/, docs/derived/user-stories/, docs/derived/prompts/',
+        'Generated artifacts: specs/epics/, specs/capabilities/, specs/stories/, prompts/stories/',
         `Story linkage: ${story.id} -> ${story.feature} -> ${story.epic}`,
       ]),
       '',
@@ -869,7 +869,16 @@ export function resolveArtifactByIdOrPath(artifact: string): { path: string; dat
     }
   }
 
-  const dirs = ['docs/derived/user-stories', 'docs/derived/features', 'docs/derived/epics', 'docs/derived/prompts']
+  const dirs = [
+    'specs/stories',
+    'specs/capabilities',
+    'specs/epics',
+    'prompts/stories',
+    'docs/derived/user-stories',
+    'docs/derived/features',
+    'docs/derived/epics',
+    'docs/derived/prompts',
+  ]
   for (const directory of dirs) {
     const absoluteDir = path.resolve(directory)
     if (!fs.existsSync(absoluteDir)) {

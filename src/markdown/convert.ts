@@ -16,7 +16,7 @@ function computeDocumentId(inputPath: string): string {
 }
 
 function ensureGovernanceDir(): string {
-  const dir = path.resolve('docs/derived/governance')
+  const dir = path.resolve('specs/governance')
   fs.mkdirSync(dir, { recursive: true })
   return dir
 }

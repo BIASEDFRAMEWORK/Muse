@@ -118,7 +118,7 @@ function shouldKeepSection(section: Section): boolean {
 function outputPathFor(inputPath: string): string {
   const absolute = path.resolve(inputPath)
   const parsed = path.parse(absolute)
-  const outDir = path.resolve('docs/derived/governance')
+  const outDir = path.resolve('specs/governance')
   fs.mkdirSync(outDir, { recursive: true })
 
   const baseName = parsed.name.endsWith('.digital') ? parsed.name : `${parsed.name}.digital`

@@ -8,7 +8,7 @@ export function generateDecisions(governanceMarkdownPath: string): string {
   }
 
   const content = fs.readFileSync(absolute, 'utf8')
-  const outputDir = path.resolve('docs/decisions')
+  const outputDir = path.resolve('decisions')
   fs.mkdirSync(outputDir, { recursive: true })
 
   const outputPath = path.join(outputDir, 'architecture-decisions.md')
