@@ -10,22 +10,24 @@ source_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/
 derived_from_document_id: gov-original-document-system-of-record
 origin_markdown_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# Retrieve document metadata independently
+# Retrieve original document by ID
 
 ## User Story
-As a API consumer, I want to I want to fetch document metadata without downloading the full document content, so that I can so that I can inspect document properties and make decisions before streaming content.
+As a API client, I want to I want to download the original document using its document ID, so that I can so that I can access the exact original bytes that were uploaded.
 
 ## Acceptance Criteria
-- GET /documents/{documentId}/metadata returns 200 status code with JSON metadata for valid document IDs
-- Response includes standard metadata fields: filename, size, content-type, created_date, modified_date
-- Invalid document IDs return 404 status code with error message
-- Response time is under 100ms for metadata retrieval
-- Metadata is returned even if original document file is temporarily unavailable
+- System provides GET /documents/{documentId} endpoint
+- System streams original document bytes in response
+- System returns appropriate Content-Type header based on file type
+- System returns 404 error for non-existent document IDs
+- System maintains original file integrity during retrieval
+- System supports range requests for large file downloads
 - Outcome focus for this story: The API exposes read-only access:.
 
 ## Technical Notes
-- Store metadata separately from document content for fast access
-- Use database indexes on document_id for quick metadata lookups
-- Implement caching layer for frequently accessed metadata
-- Ensure metadata consistency with actual document properties
+- Implement streaming response to handle large files efficiently
+- Store original MIME type in metadata for proper Content-Type header
+- Use database lookup to locate file storage path
+- Implement file existence validation before streaming
+- Add ETag header support for caching optimization
 - Implementation should prioritize The API exposes read-only access:.

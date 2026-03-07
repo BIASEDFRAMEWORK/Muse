@@ -10,10 +10,10 @@ source_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/
 derived_from_document_id: gov-original-document-system-of-record
 origin_markdown_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# Document Access Audit Logging — implementation path
+# Document Access Audit Trail — implementation path
 
 ## User Story
-As a platform engineer, I want to implement document access audit logging for the implementation path, so that I can satisfy governance requirements for the implementation path.
+As a platform engineer, I want to implement document access audit trail for the implementation path, so that I can satisfy governance requirements for the implementation path.
 
 ## Acceptance Criteria
 - Behavior for the implementation path is implemented behind automated tests with deterministic outcomes.

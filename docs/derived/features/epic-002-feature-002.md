@@ -8,21 +8,23 @@ source_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/
 derived_from_document_id: gov-original-document-system-of-record
 origin_markdown_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# Document Access Audit Logging
+# Document Access Audit Trail
 
 ## Capability
-Track and log all document access attempts with immutable audit trail
+Generate comprehensive audit logs for all document access attempts including metadata queries and content retrieval
 
 ## Implementation Notes
-- Log each GET request to documents endpoint with user ID, timestamp, document ID
-- Include client IP address, user agent, and success/failure status
-- Store audit logs in append-only database or write-ahead log
-- Implement structured logging format (JSON) for automated analysis
+- Log structured events to centralized logging system with timestamp, user ID, document ID, and outcome
+- Include request source IP, user agent, and session identifier in audit records
+- Implement async logging to prevent performance impact on document retrieval
+- Store audit logs with tamper-evident signatures or checksums
+- Provide audit log retention policy with configurable retention periods
 - Primary delivery slice: The API exposes read-only access:.
 
 ## Acceptance Criteria
-- Every document access attempt generates audit log entry within 50ms
-- Audit logs contain user ID, document ID, timestamp, IP address, and result
-- Audit logs are tamper-evident and cannot be modified after creation
-- Failed access attempts are logged with specific denial reason
+- Every GET request to documents endpoint generates an audit log entry
+- Audit logs include all required fields: timestamp, user, document, action, result
+- Failed access attempts are logged with detailed error information
+- Audit logs are immutable once written to storage
+- Audit trail can be queried by document ID, user ID, or time range
 - Control focus for this feature: The API exposes read-only access:.

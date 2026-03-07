@@ -10,22 +10,19 @@ source_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/
 derived_from_document_id: gov-original-document-system-of-record
 origin_markdown_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# As an authenticated user, I want to retrieve document content based on my role permissions
+# System Administrator can access all documents via API
 
 ## User Story
-As a authenticated user, I want to I can access document content through the GET /documents/{documentId} endpoint only if my role has read permissions for that document, so that I can I can securely access documents I'm authorized to view while being prevented from accessing restricted content.
+As a System Administrator, I want to I want to access any document through the read-only API endpoints, so that I can so that I can manage and troubleshoot document access across the entire system.
 
 ## Acceptance Criteria
-- GET /documents/{documentId} returns 200 with document bytes when user role has read permission
-- GET /documents/{documentId} returns 403 when user role lacks read permission
-- GET /documents/{documentId} returns 401 when user is not authenticated
-- Response includes appropriate Content-Type header based on document format
-- Document streaming works for files of various sizes
+- Given I am authenticated as a System Administrator, when I make a GET request to /documents/{documentId}, then I receive the document bytes regardless of the document's access restrictions
+- Given I am authenticated as a System Administrator, when I make a GET request to /documents/{documentId}/metadata, then I receive the complete metadata regardless of the document's access restrictions
+- Given I provide an invalid documentId, when I make a GET request to either endpoint, then I receive a 404 Not Found response
 - Outcome focus for this story: The API exposes read-only access:.
 
 ## Technical Notes
-- Implement role-based authorization middleware that checks user permissions before streaming
-- Use role-document permission mapping stored in database or configuration
-- Ensure streaming implementation handles large files efficiently
-- Cache permission checks for performance optimization
+- Implement role check in authorization middleware before document access validation
+- System Administrator role should bypass all document-level access controls
+- Maintain audit logging for all administrator document access
 - Implementation should prioritize The API exposes read-only access:.

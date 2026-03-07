@@ -10,22 +10,20 @@ source_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/
 derived_from_document_id: gov-original-document-system-of-record
 origin_markdown_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# As an authenticated user, I want to retrieve document metadata based on my role permissions
+# Regular user can access authorized documents only
 
 ## User Story
-As a authenticated user, I want to I can access document metadata through the GET /documents/{documentId}/metadata endpoint only if my role has read permissions for that document, so that I can I can view document properties and metadata for authorized documents without downloading the full content.
+As a Regular User, I want to I want to retrieve documents that I have permission to access through the API, so that I can so that I can view documents relevant to my role while being prevented from accessing restricted content.
 
 ## Acceptance Criteria
-- GET /documents/{documentId}/metadata returns 200 with metadata JSON when user role has read permission
-- GET /documents/{documentId}/metadata returns 403 when user role lacks read permission
-- GET /documents/{documentId}/metadata returns 401 when user is not authenticated
-- Metadata response includes document properties like size, type, upload date, and custom metadata
-- Response format is consistent JSON structure
+- Given I am authenticated as a Regular User with access to a document, when I make a GET request to /documents/{documentId}, then I receive the document bytes
+- Given I am authenticated as a Regular User with access to a document, when I make a GET request to /documents/{documentId}/metadata, then I receive the document metadata
+- Given I am authenticated as a Regular User without access to a document, when I make a GET request to either endpoint, then I receive a 403 Forbidden response
+- Given I am not authenticated, when I make a GET request to either endpoint, then I receive a 401 Unauthorized response
 - Outcome focus for this story: The API exposes read-only access:.
 
 ## Technical Notes
-- Reuse same role-based authorization middleware as document content endpoint
-- Metadata should be retrieved from database without accessing the actual document file
-- Consider what metadata fields should be included in response schema
-- Ensure metadata endpoint has lower latency than full document retrieval
+- Implement document-level permission checking in authorization middleware
+- Cache user permissions for performance optimization
+- Return consistent 403 responses for unauthorized access to prevent information disclosure
 - Implementation should prioritize The API exposes read-only access:.

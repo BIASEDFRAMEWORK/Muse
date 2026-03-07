@@ -276,6 +276,10 @@ function markdownList(items: string[]): string {
   return items.map((item) => `- ${item}`).join('\n')
 }
 
+function numberedList(items: string[]): string {
+  return items.map((item, index) => `${index + 1}. ${item}`).join('\n')
+}
+
 function normalizeForSignature(value: string): string {
   return value.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim()
 }
@@ -609,9 +613,76 @@ export async function deriveArtifacts(options: DeriveArtifactsOptions): Promise<
     )
 
     const promptFile = `docs/derived/prompts/${prompt.id}.md`
+    const requiredChanges = [
+      `Implement ${story.title}.`,
+      ...normalizeList(story.technicalNotes, [
+        `Deliver the behavior: ${story.behavior}.`,
+        'Keep implementation observable and testable.',
+      ]).slice(0, 4),
+    ]
+
+    const constraints = [
+      'Preserve traceability metadata and naming conventions for generated artifacts.',
+      'Do not modify files under /contracts without explicit instruction.',
+      'Keep changes scoped to the requested objective and avoid unrelated refactors.',
+      `Use governance source: ${governanceLineage.sourcePath}`,
+    ]
+
+    const acceptanceCriteria = normalizeList(story.acceptanceCriteria, [
+      `Complete story behavior: ${story.behavior}.`,
+      'All changes are validated with build/test commands.',
+    ])
+
+    const validationCommands = [
+      'npm run build',
+      'node scripts/validate-traceability.mjs',
+    ]
+
+    const promptBody = [
+      `# AI Implementation Prompt: ${prompt.id}`,
+      '',
+      '## Objective',
+      `Implement ${story.title}.`,
+      '',
+      '## Repo Context',
+      markdownList([
+        'Primary code paths: src/cli/, src/pipeline/, src/config/',
+        'Generated artifacts: docs/derived/epics/, docs/derived/features/, docs/derived/user-stories/, docs/derived/prompts/',
+        `Story linkage: ${story.id} -> ${story.feature} -> ${story.epic}`,
+      ]),
+      '',
+      '## Required Changes',
+      numberedList(requiredChanges),
+      '',
+      '## Constraints',
+      markdownList(constraints),
+      '',
+      '## Acceptance Criteria',
+      markdownList(acceptanceCriteria),
+      '',
+      '## Validation',
+      markdownList(validationCommands.map((command) => `\`${command}\``)),
+      '',
+      '## Deliverable',
+      'Return a patch plus a short summary of modified files and validation results.',
+      '',
+      '## Implementation Brief',
+      prompt.prompt,
+      '',
+      '## Implementation Checklist',
+      markdownList(prompt.checklist || ['Map code changes to acceptance criteria and tests.']),
+    ].join('\n')
+
     writeArtifact(
       promptFile,
-      `${frontMatter({ id: prompt.id, story: prompt.story, source: prompt.source })}# ${prompt.title}\n\n${prompt.prompt}\n\n## Implementation Checklist\n${markdownList(prompt.checklist || ['Map code changes to acceptance criteria and tests.'])}`,
+      `${frontMatter({
+        id: prompt.id,
+        prompt_id: prompt.id,
+        story: prompt.story,
+        feature: story.feature,
+        epic: story.epic,
+        source: prompt.source,
+      })}${promptBody}`,
     )
   }
 

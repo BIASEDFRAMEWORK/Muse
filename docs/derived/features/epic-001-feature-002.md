@@ -8,23 +8,23 @@ source_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/
 derived_from_document_id: gov-original-document-system-of-record
 origin_markdown_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# Document Metadata Retrieval API
+# Read-Only Document Retrieval
 
 ## Capability
-Retrieve structured document metadata including timestamps, file properties, and system attributes
+Stream original document bytes and metadata through secure endpoints with integrity verification
 
 ## Implementation Notes
-- Implement GET /documents/{documentId}/metadata endpoint
-- Return JSON with file size, creation date, modification date, checksum
-- Include document format, encoding, and validation status
-- Add system metadata like ingestion timestamp and storage location
-- Sanitize sensitive metadata fields before response
+- Implement GET /documents/{documentId} for binary document streaming
+- Implement GET /documents/{documentId}/metadata for JSON metadata response
+- Include Content-Type header based on stored MIME type
+- Add ETag header with document hash for cache validation
+- Stream large documents in 64KB chunks to prevent memory issues
 - Primary delivery slice: The API exposes read-only access:.
 
 ## Acceptance Criteria
-- GET /documents/{valid-id}/metadata returns 200 with JSON metadata
-- Response includes required fields: size, created_at, modified_at, checksum
-- Document format and encoding are correctly identified
-- Invalid document IDs return 404 with structured error
-- Response time under 200ms for metadata requests
+- Document retrieval responds within 2 seconds for files under 10MB
+- Metadata endpoint returns JSON with all stored document properties
+- Binary stream matches exact original bytes with hash verification
+- Invalid document IDs return 404 Not Found status
+- ETag header matches stored document hash
 - Control focus for this feature: The API exposes read-only access:.

@@ -10,23 +10,24 @@ source_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/
 derived_from_document_id: gov-original-document-system-of-record
 origin_markdown_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# Stream document content via REST API
+# Upload document and generate cryptographic hash
 
 ## User Story
-As a API consumer, I want to I want to retrieve document content by document ID through a streaming endpoint, so that I can so that I can access original document bytes efficiently without loading entire files into memory.
+As a API client, I want to I want to upload a document file and receive a cryptographic hash, so that I can so that I can verify document integrity and detect any modifications.
 
 ## Acceptance Criteria
-- GET /documents/{documentId} returns a 200 status code with streaming response for valid document IDs
-- Response includes appropriate Content-Type header based on document format
-- Response includes Content-Length header when document size is known
-- Invalid document IDs return 404 status code with error message
-- Streaming begins immediately without buffering entire document
-- Connection supports HTTP/1.1 chunked transfer encoding
+- System accepts file uploads via HTTP POST request
+- System generates SHA-256 hash of uploaded document bytes
+- System returns hash value in response payload
+- System persists both document and hash for later retrieval
+- System validates file is not empty before processing
+- System handles upload failures gracefully with appropriate error codes
 - Outcome focus for this story: The API exposes read-only access:.
 
 ## Technical Notes
-- Implement using streaming response patterns to handle large files
-- Use async I/O to prevent blocking server threads during file reads
-- Include proper error handling for file system access failures
-- Consider implementing Range header support for partial content requests
+- Implement POST /documents endpoint with multipart/form-data support
+- Use SHA-256 algorithm for hash generation
+- Store hash alongside document metadata in database
+- Return JSON response with documentId and hash fields
+- Implement file size validation and MIME type checking
 - Implementation should prioritize The API exposes read-only access:.

@@ -1,14 +1,14 @@
 # Prioritized TODO Backlog
 
 ## P0
-- [ ] epic-001-feature-001-story-001: Stream document content via REST API
-- [ ] epic-001-feature-001-story-002: Retrieve document metadata independently
-- [ ] epic-001-feature-002-story-001: Document Metadata Retrieval API — implementation path
-- [ ] epic-002-feature-001-story-001: As an authenticated user, I want to retrieve document content based on my role permissions
+- [ ] epic-001-feature-001-story-001: Upload document and generate cryptographic hash
+- [ ] epic-001-feature-001-story-002: Retrieve original document by ID
+- [ ] epic-001-feature-002-story-001: Read-Only Document Retrieval — implementation path
+- [ ] epic-002-feature-001-story-001: System Administrator can access all documents via API
 
 ## P1
-- [ ] epic-002-feature-001-story-002: As an authenticated user, I want to retrieve document metadata based on my role permissions
-- [ ] epic-002-feature-002-story-001: Document Access Audit Logging — implementation path
+- [ ] epic-002-feature-001-story-002: Regular user can access authorized documents only
+- [ ] epic-002-feature-002-story-001: Document Access Audit Trail — implementation path
 
 ## P2
 - (none)

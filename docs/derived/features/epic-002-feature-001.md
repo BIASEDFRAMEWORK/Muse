@@ -8,21 +8,23 @@ source_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/
 derived_from_document_id: gov-original-document-system-of-record
 origin_markdown_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# Role-Based Document Access Control
+# Role-Based Document Access Authorization
 
 ## Capability
-Implement granular access control that restricts document retrieval based on user roles and permissions
+Implement role-based access control with permission verification before serving document content or metadata
 
 ## Implementation Notes
-- Create role hierarchy with read permissions (viewer, editor, admin)
-- Implement JWT-based authentication with role claims
-- Add middleware to validate user permissions before document access
-- Store document-to-role mappings in access control database
+- Integrate with identity provider to validate user roles and permissions
+- Create access control matrix mapping roles to document types and operations
+- Implement middleware to intercept GET requests and validate permissions before processing
+- Cache user permissions with configurable TTL to optimize performance
+- Support hierarchical roles with inheritance of permissions
 - Primary delivery slice: The API exposes read-only access:.
 
 ## Acceptance Criteria
-- Users can only access documents for which they have explicit read permissions
-- API returns 403 Forbidden when user lacks document access rights
-- Role assignments can be modified without system restart
-- Permission checks complete within 100ms for authenticated requests
+- Unauthorized users receive 403 Forbidden when accessing restricted documents
+- Users can only access documents matching their role permissions
+- Permission checks complete within 100ms for cached permissions
+- Role changes propagate to access controls within configured cache TTL
+- System logs all access attempts with user identity and outcome
 - Control focus for this feature: The API exposes read-only access:.

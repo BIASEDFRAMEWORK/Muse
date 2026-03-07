@@ -8,23 +8,23 @@ source_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/
 derived_from_document_id: gov-original-document-system-of-record
 origin_markdown_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/derived/governance/original-document-system-of-record.digital.md
 ---
-# Document Content Streaming API
+# Document Upload and Hash Generation
 
 ## Capability
-Stream original document bytes through authenticated GET endpoint with content-type detection
+Store documents with cryptographic integrity verification and immutable metadata capture
 
 ## Implementation Notes
-- Implement GET /documents/{documentId} endpoint with streaming response
-- Auto-detect MIME type from file headers and extension
-- Support range requests for large file downloads
-- Return appropriate HTTP headers (Content-Length, Content-Type, ETag)
-- Handle binary and text document formats uniformly
+- Generate SHA-256 hash on upload to detect tampering
+- Store original document bytes in content-addressable storage
+- Capture upload timestamp, file size, MIME type, and uploader identity
+- Assign unique document ID based on content hash and timestamp
+- Reject duplicate uploads based on hash comparison
 - Primary delivery slice: The API exposes read-only access:.
 
 ## Acceptance Criteria
-- GET /documents/{valid-id} returns 200 with original file bytes
-- Content-Type header matches actual document format
-- Large files (>10MB) stream without memory overflow
-- Range requests return 206 with correct byte ranges
-- Invalid document IDs return 404 with error message
+- Document hash is calculated and stored within 500ms of upload
+- Original document bytes are immutable after successful upload
+- Metadata includes timestamp accurate to milliseconds
+- Duplicate document uploads return existing document ID
+- Upload fails if document exceeds 100MB size limit
 - Control focus for this feature: The API exposes read-only access:.
