@@ -16,3 +16,4 @@ npm-debug.log
 /storage/
 traceability-report.json
 traceability-report.txt
+logs/llm-usage.jsonl
