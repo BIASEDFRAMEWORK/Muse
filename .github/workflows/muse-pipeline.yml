@@ -73,6 +73,7 @@ jobs:
           file_pattern: docs/**
 
       - name: Create pull request
+        id: create-pr
         uses: peter-evans/create-pull-request@22a9089034f40e5a961c8808d113e2c98fb63676 # v7
         with:
           token: ${{ steps.app-token.outputs.token }}
@@ -83,3 +84,17 @@ jobs:
           labels: |
             automation
             muse
+
+      - name: Verify PR author is GitHub App
+        if: ${{ steps.create-pr.outputs.pull-request-number != '' }}
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          EXPECTED_AUTHOR: app/prbotformuse2
+          PR_NUMBER: ${{ steps.create-pr.outputs.pull-request-number }}
+        run: |
+          author=$(gh pr view "$PR_NUMBER" --json author --jq '.author.login')
+          echo "PR #$PR_NUMBER author: $author"
+          if [ "$author" != "$EXPECTED_AUTHOR" ]; then
+            echo "Expected PR author $EXPECTED_AUTHOR but got $author"
+            exit 1
+          fi
