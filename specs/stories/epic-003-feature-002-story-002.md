@@ -5,27 +5,23 @@ epic: epic-003
 feature: epic-003-feature-002
 derived_from_epic: epic-003
 derived_from_feature: epic-003-feature-002
-source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
-source_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
+source: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
+source_path: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
 derived_from_document_id: gov-original-document-system-of-record
-origin_markdown_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
+origin_markdown_path: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
 ---
-# Dynamic permission evaluation for document metadata access
+# Retrieval (Read-only) — Audit telemetry and evidence capture — operational evidence path
 
 ## User Story
-As a API consumer, I want to I want the system to evaluate my permissions when accessing document metadata, so that I can so that I only see metadata for documents I'm authorized to access.
+As a system, I must perform enforce retrieval (read-only) — audit telemetry and evidence capture for the operational evidence path so that governance requirements are satisfied.
 
 ## Acceptance Criteria
-- GET /documents/{documentId}/metadata returns 403 Forbidden when user lacks metadata read permission
-- GET /documents/{documentId}/metadata returns metadata object when user has appropriate permission
-- Metadata permissions can be evaluated independently from document content permissions
-- Permission evaluation supports granular metadata field-level access control
-- System returns consistent permission decisions across multiple requests
+- Behavior for the operational evidence path records timestamped evidence with actor identity attribution.
+- Audit and security events for the operational evidence path are written to secure, access-controlled logging or storage.
+- Automated tests validate success, failure, and evidence-capture behavior for the operational evidence path.
 - Outcome focus for this story: The API exposes read-only access:.
 
 ## Technical Notes
-- Implement separate permission evaluation for metadata vs content access
-- Support attribute-based access control (ABAC) for fine-grained permissions
-- Use policy engine to evaluate complex permission rules
-- Implement permission result caching with cache invalidation strategy
+- Apply least-privilege authorization checks for the operational evidence path.
+- Ensure structured logs for the operational evidence path are queryable for compliance evidence.
 - Implementation should prioritize The API exposes read-only access:.

@@ -4,12 +4,12 @@ prompt_id: epic-003-feature-002-prompt-002
 story: epic-003-feature-002-story-002
 feature: epic-003-feature-002
 epic: epic-003
-source: specs/governance/original-document-system-of-record.digital.md
+source: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
 ---
 # AI Implementation Prompt: epic-003-feature-002-prompt-002
 
 ## Objective
-Implement Dynamic permission evaluation for document metadata access.
+Implement Retrieval (Read-only) — Audit telemetry and evidence capture — operational evidence path.
 
 ## Repo Context
 - Primary code paths: src/cli/, src/pipeline/, src/config/
@@ -17,24 +17,21 @@ Implement Dynamic permission evaluation for document metadata access.
 - Story linkage: epic-003-feature-002-story-002 -> epic-003-feature-002 -> epic-003
 
 ## Required Changes
-1. Implement Dynamic permission evaluation for document metadata access.
-2. Implement separate permission evaluation for metadata vs content access
-3. Support attribute-based access control (ABAC) for fine-grained permissions
-4. Use policy engine to evaluate complex permission rules
-5. Implement permission result caching with cache invalidation strategy
+1. Implement Retrieval (Read-only) — Audit telemetry and evidence capture — operational evidence path.
+2. Apply least-privilege authorization checks for the operational evidence path.
+3. Ensure structured logs for the operational evidence path are queryable for compliance evidence.
+4. Implementation should prioritize The API exposes read-only access:.
 
 ## Constraints
 - Preserve traceability metadata and naming conventions for generated artifacts.
 - Do not modify files under /docs/organizational-contracts without explicit instruction.
 - Keep changes scoped to the requested objective and avoid unrelated refactors.
-- Use governance source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
+- Use governance source: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
 
 ## Acceptance Criteria
-- GET /documents/{documentId}/metadata returns 403 Forbidden when user lacks metadata read permission
-- GET /documents/{documentId}/metadata returns metadata object when user has appropriate permission
-- Metadata permissions can be evaluated independently from document content permissions
-- Permission evaluation supports granular metadata field-level access control
-- System returns consistent permission decisions across multiple requests
+- Behavior for the operational evidence path records timestamped evidence with actor identity attribution.
+- Audit and security events for the operational evidence path are written to secure, access-controlled logging or storage.
+- Automated tests validate success, failure, and evidence-capture behavior for the operational evidence path.
 - Outcome focus for this story: The API exposes read-only access:.
 
 ## Validation
@@ -45,15 +42,13 @@ Implement Dynamic permission evaluation for document metadata access.
 Return a patch plus a short summary of modified files and validation results.
 
 ## Implementation Brief
-Implement Dynamic permission evaluation for document metadata access.
-Context: I want the system to evaluate my permissions when accessing document metadata.
+Implement Retrieval (Read-only) — Audit telemetry and evidence capture — operational evidence path.
+Context: enforce retrieval (read-only) — audit telemetry and evidence capture for the operational evidence path.
 Return production-ready code changes, unit tests, and integration tests with explicit acceptance-criteria mapping.
 
 ## Implementation Checklist
-- GET /documents/{documentId}/metadata returns 403 Forbidden when user lacks metadata read permission
-- GET /documents/{documentId}/metadata returns metadata object when user has appropriate permission
-- Metadata permissions can be evaluated independently from document content permissions
-- Permission evaluation supports granular metadata field-level access control
-- System returns consistent permission decisions across multiple requests
+- Behavior for the operational evidence path records timestamped evidence with actor identity attribution.
+- Audit and security events for the operational evidence path are written to secure, access-controlled logging or storage.
+- Automated tests validate success, failure, and evidence-capture behavior for the operational evidence path.
 - Outcome focus for this story: The API exposes read-only access:.
-- Implementation outcome is unique to epic-003-feature-002-story-002 (Dynamic permission evaluation for document metadata access).
+- Implementation outcome is unique to epic-003-feature-002-story-002 (Retrieval (Read-only) — Audit telemetry and evidence capture — operational evidence path).

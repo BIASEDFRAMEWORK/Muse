@@ -5,28 +5,23 @@ epic: epic-001
 feature: epic-001-feature-002
 derived_from_epic: epic-001
 derived_from_feature: epic-001-feature-002
-source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
-source_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
+source: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
+source_path: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
 derived_from_document_id: gov-original-document-system-of-record
-origin_markdown_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
+origin_markdown_path: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
 ---
-# Implement role-based authorization for document access
+# Access Control and Authorization — Audit telemetry and evidence capture — operational evidence path
 
 ## User Story
-As a system administrator, I want to configure role-based permissions to control which documents users can access, so that I can I can ensure users only access documents they are authorized to view.
+As a system, I must perform enforce access control and authorization — audit telemetry and evidence capture for the operational evidence path so that governance requirements are satisfied.
 
 ## Acceptance Criteria
-- Each API key is associated with one or more roles (viewer, admin, etc.)
-- Document access is restricted based on user role permissions
-- Unauthorized access attempts return HTTP 403 Forbidden
-- Role permissions are enforced on both GET /documents/{documentId} and GET /documents/{documentId}/metadata endpoints
-- System supports hierarchical roles where higher roles inherit lower role permissions
+- Behavior for the operational evidence path records timestamped evidence with actor identity attribution.
+- Audit and security events for the operational evidence path are written to secure, access-controlled logging or storage.
+- Automated tests validate success, failure, and evidence-capture behavior for the operational evidence path.
 - Outcome focus for this story: The API exposes read-only access:.
 
 ## Technical Notes
-- Implement role-permission mapping in database or configuration
-- Create authorization middleware that runs after authentication
-- Document metadata should include access control information
-- Use consistent error response format for authorization failures
-- Consider implementing resource-level permissions for fine-grained control
+- Apply least-privilege authorization checks for the operational evidence path.
+- Ensure structured logs for the operational evidence path are queryable for compliance evidence.
 - Implementation should prioritize The API exposes read-only access:.

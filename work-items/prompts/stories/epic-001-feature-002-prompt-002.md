@@ -4,12 +4,12 @@ prompt_id: epic-001-feature-002-prompt-002
 story: epic-001-feature-002-story-002
 feature: epic-001-feature-002
 epic: epic-001
-source: specs/governance/original-document-system-of-record.digital.md
+source: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
 ---
 # AI Implementation Prompt: epic-001-feature-002-prompt-002
 
 ## Objective
-Implement Implement role-based authorization for document access.
+Implement Access Control and Authorization — Audit telemetry and evidence capture — operational evidence path.
 
 ## Repo Context
 - Primary code paths: src/cli/, src/pipeline/, src/config/
@@ -17,24 +17,21 @@ Implement Implement role-based authorization for document access.
 - Story linkage: epic-001-feature-002-story-002 -> epic-001-feature-002 -> epic-001
 
 ## Required Changes
-1. Implement Implement role-based authorization for document access.
-2. Implement role-permission mapping in database or configuration
-3. Create authorization middleware that runs after authentication
-4. Document metadata should include access control information
-5. Use consistent error response format for authorization failures
+1. Implement Access Control and Authorization — Audit telemetry and evidence capture — operational evidence path.
+2. Apply least-privilege authorization checks for the operational evidence path.
+3. Ensure structured logs for the operational evidence path are queryable for compliance evidence.
+4. Implementation should prioritize The API exposes read-only access:.
 
 ## Constraints
 - Preserve traceability metadata and naming conventions for generated artifacts.
 - Do not modify files under /docs/organizational-contracts without explicit instruction.
 - Keep changes scoped to the requested objective and avoid unrelated refactors.
-- Use governance source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
+- Use governance source: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
 
 ## Acceptance Criteria
-- Each API key is associated with one or more roles (viewer, admin, etc.)
-- Document access is restricted based on user role permissions
-- Unauthorized access attempts return HTTP 403 Forbidden
-- Role permissions are enforced on both GET /documents/{documentId} and GET /documents/{documentId}/metadata endpoints
-- System supports hierarchical roles where higher roles inherit lower role permissions
+- Behavior for the operational evidence path records timestamped evidence with actor identity attribution.
+- Audit and security events for the operational evidence path are written to secure, access-controlled logging or storage.
+- Automated tests validate success, failure, and evidence-capture behavior for the operational evidence path.
 - Outcome focus for this story: The API exposes read-only access:.
 
 ## Validation
@@ -45,15 +42,13 @@ Implement Implement role-based authorization for document access.
 Return a patch plus a short summary of modified files and validation results.
 
 ## Implementation Brief
-Implement Implement role-based authorization for document access.
-Context: configure role-based permissions to control which documents users can access.
+Implement Access Control and Authorization — Audit telemetry and evidence capture — operational evidence path.
+Context: enforce access control and authorization — audit telemetry and evidence capture for the operational evidence path.
 Return production-ready code changes, unit tests, and integration tests with explicit acceptance-criteria mapping.
 
 ## Implementation Checklist
-- Each API key is associated with one or more roles (viewer, admin, etc.)
-- Document access is restricted based on user role permissions
-- Unauthorized access attempts return HTTP 403 Forbidden
-- Role permissions are enforced on both GET /documents/{documentId} and GET /documents/{documentId}/metadata endpoints
-- System supports hierarchical roles where higher roles inherit lower role permissions
+- Behavior for the operational evidence path records timestamped evidence with actor identity attribution.
+- Audit and security events for the operational evidence path are written to secure, access-controlled logging or storage.
+- Automated tests validate success, failure, and evidence-capture behavior for the operational evidence path.
 - Outcome focus for this story: The API exposes read-only access:.
-- Implementation outcome is unique to epic-001-feature-002-story-002 (Implement role-based authorization for document access).
+- Implementation outcome is unique to epic-001-feature-002-story-002 (Access Control and Authorization — Audit telemetry and evidence capture — operational evidence path).

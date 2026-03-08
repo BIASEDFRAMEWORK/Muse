@@ -4,12 +4,12 @@ prompt_id: epic-001-feature-001-prompt-002
 story: epic-001-feature-001-story-002
 feature: epic-001-feature-001
 epic: epic-001
-source: specs/governance/original-document-system-of-record.digital.md
+source: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
 ---
 # AI Implementation Prompt: epic-001-feature-001-prompt-002
 
 ## Objective
-Implement Document Metadata Retrieval by ID.
+Implement Access Control and Authorization — Authorization enforcement — operational evidence path.
 
 ## Repo Context
 - Primary code paths: src/cli/, src/pipeline/, src/config/
@@ -17,25 +17,21 @@ Implement Document Metadata Retrieval by ID.
 - Story linkage: epic-001-feature-001-story-002 -> epic-001-feature-001 -> epic-001
 
 ## Required Changes
-1. Implement Document Metadata Retrieval by ID.
-2. Return metadata from database without accessing document storage
-3. Include standard metadata fields: id, filename, size, content_type, created_at
-4. Validate documentId parameter format
-5. Use database indexes for efficient metadata lookup
+1. Implement Access Control and Authorization — Authorization enforcement — operational evidence path.
+2. Apply least-privilege authorization checks for the operational evidence path.
+3. Ensure structured logs for the operational evidence path are queryable for compliance evidence.
+4. Implementation should prioritize The API exposes read-only access:.
 
 ## Constraints
 - Preserve traceability metadata and naming conventions for generated artifacts.
 - Do not modify files under /docs/organizational-contracts without explicit instruction.
 - Keep changes scoped to the requested objective and avoid unrelated refactors.
-- Use governance source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
+- Use governance source: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
 
 ## Acceptance Criteria
-- GET /documents/{documentId}/metadata returns HTTP 200 with JSON metadata when document exists
-- Response includes all persisted metadata fields (filename, size, content-type, upload timestamp)
-- Returns HTTP 404 when documentId does not exist
-- Returns HTTP 400 when documentId format is invalid
-- Response time is under 200ms for metadata retrieval
-- Response includes appropriate JSON Content-Type header
+- Behavior for the operational evidence path records timestamped evidence with actor identity attribution.
+- Audit and security events for the operational evidence path are written to secure, access-controlled logging or storage.
+- Automated tests validate success, failure, and evidence-capture behavior for the operational evidence path.
 - Outcome focus for this story: The API exposes read-only access:.
 
 ## Validation
@@ -46,16 +42,13 @@ Implement Document Metadata Retrieval by ID.
 Return a patch plus a short summary of modified files and validation results.
 
 ## Implementation Brief
-Implement Document Metadata Retrieval by ID.
-Context: retrieve document metadata using a document ID.
+Implement Access Control and Authorization — Authorization enforcement — operational evidence path.
+Context: enforce access control and authorization — authorization enforcement for the operational evidence path.
 Return production-ready code changes, unit tests, and integration tests with explicit acceptance-criteria mapping.
 
 ## Implementation Checklist
-- GET /documents/{documentId}/metadata returns HTTP 200 with JSON metadata when document exists
-- Response includes all persisted metadata fields (filename, size, content-type, upload timestamp)
-- Returns HTTP 404 when documentId does not exist
-- Returns HTTP 400 when documentId format is invalid
-- Response time is under 200ms for metadata retrieval
-- Response includes appropriate JSON Content-Type header
+- Behavior for the operational evidence path records timestamped evidence with actor identity attribution.
+- Audit and security events for the operational evidence path are written to secure, access-controlled logging or storage.
+- Automated tests validate success, failure, and evidence-capture behavior for the operational evidence path.
 - Outcome focus for this story: The API exposes read-only access:.
-- Implementation outcome is unique to epic-001-feature-001-story-002 (Document Metadata Retrieval by ID).
+- Implementation outcome is unique to epic-001-feature-001-story-002 (Access Control and Authorization — Authorization enforcement — operational evidence path).
