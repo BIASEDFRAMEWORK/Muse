@@ -3,28 +3,23 @@ id: epic-003-feature-001
 feature_id: epic-003-feature-001
 epic: epic-003
 derived_from_epic: epic-003
-source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
-source_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
+source: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
+source_path: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
 derived_from_document_id: gov-original-document-system-of-record
-origin_markdown_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
+origin_markdown_path: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
 ---
-# Role-based Document Retrieval Authorization
+# Retrieval (Read-only) — Authorization enforcement
 
 ## Capability
-Implement access control validation for document retrieval endpoints based on user roles and document sensitivity levels
+Implement measurable controls supporting retrieval (read-only) with a focus on authorization enforcement.
 
 ## Implementation Notes
-- Integrate with identity provider to extract user roles from JWT tokens
-- Map document metadata to sensitivity classifications (public, internal, confidential, restricted)
-- Create role-to-classification access matrix stored in configuration
-- Apply access checks before streaming document bytes or metadata
-- Return HTTP 403 for unauthorized access attempts with audit logging
+- Expose service boundaries for authorization enforcement with explicit interfaces.
+- Capture operational telemetry required for authorization enforcement.
 - Primary delivery slice: The API exposes read-only access:.
 
 ## Acceptance Criteria
-- Users with 'viewer' role can access public and internal documents only
-- Users with 'manager' role can access public, internal, and confidential documents
-- Users with 'admin' role can access all document classifications
-- Unauthorized access attempts return 403 status with descriptive error message
-- All access attempts are logged with user ID, document ID, and outcome
+- Given required authorization enforcement rules, protected operations enforce policy correctly.
+- Given violations in authorization enforcement, requests are blocked and evidence is recorded.
+- Automated tests cover success, failure, and observability for authorization enforcement.
 - Control focus for this feature: The API exposes read-only access:.

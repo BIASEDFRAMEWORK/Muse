@@ -5,26 +5,23 @@ epic: epic-003
 feature: epic-003-feature-001
 derived_from_epic: epic-003
 derived_from_feature: epic-003-feature-001
-source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
-source_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
+source: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
+source_path: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
 derived_from_document_id: gov-original-document-system-of-record
-origin_markdown_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
+origin_markdown_path: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
 ---
-# Retrieve document content with role-based access control
+# Retrieval (Read-only) — Authorization enforcement — implementation path
 
 ## User Story
-As a authorized user, I want to I want to retrieve original document bytes via GET /documents/{documentId}, so that I can so that I can access documents I have permissions to view while being blocked from unauthorized content.
+As a system, I must perform enforce retrieval (read-only) — authorization enforcement for the implementation path so that governance requirements are satisfied.
 
 ## Acceptance Criteria
-- Given I have read permissions for a document, when I call GET /documents/{documentId}, then I receive the original document bytes as a stream
-- Given I do not have read permissions for a document, when I call GET /documents/{documentId}, then I receive a 403 Forbidden response
-- Given the document does not exist, when I call GET /documents/{documentId}, then I receive a 404 Not Found response
-- Given I am not authenticated, when I call GET /documents/{documentId}, then I receive a 401 Unauthorized response
+- Behavior for the implementation path records timestamped evidence with actor identity attribution.
+- Audit and security events for the implementation path are written to secure, access-controlled logging or storage.
+- Automated tests validate success, failure, and evidence-capture behavior for the implementation path.
 - Outcome focus for this story: The API exposes read-only access:.
 
 ## Technical Notes
-- Implement role-based access control middleware that validates user permissions before document retrieval
-- Stream document bytes directly from storage to avoid memory issues with large files
-- Include proper Content-Type and Content-Length headers in response
-- Log all access attempts for audit purposes
+- Apply least-privilege authorization checks for the implementation path.
+- Ensure structured logs for the implementation path are queryable for compliance evidence.
 - Implementation should prioritize The API exposes read-only access:.

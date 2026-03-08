@@ -8,7 +8,7 @@ This file captures deterministic ADRs generated from governance source and curre
 Accepted
 
 ### Context
-The team needs repeatable governance-to-engineering generation that works in CI and local development without hidden UI state. The current source is `/Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md` (678 characters).
+The team needs repeatable governance-to-engineering generation that works in CI and local development without hidden UI state. The current source is `/home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md` (652 characters).
 
 ### Decision
 Use command-driven generation as the source of truth and keep orchestration in CLI commands while business logic remains in pipeline modules.
@@ -42,7 +42,7 @@ Use command-driven generation as the source of truth and keep orchestration in C
 Accepted
 
 ### Context
-Generated artifacts require stable lineage across epics, features, stories, and prompts. Recent samples include epics `epic-001.md`, `epic-002.md` and stories `epic-001-feature-001-story-001.md`, `epic-001-feature-001-story-002.md`, `epic-001-feature-001-story-003.md`.
+Generated artifacts require stable lineage across epics, features, stories, and prompts. Recent samples include epics `epic-001.md`, `epic-002.md`, `epic-003.md` and stories `epic-001-feature-001-story-001.md`, `epic-001-feature-001-story-002.md`, `epic-001-feature-002-story-001.md`.
 
 ### Decision
 Keep canonical ID-based filenames (for example `epic-001.md`) and store human-friendly names in markdown titles/front matter.
@@ -75,7 +75,7 @@ Keep canonical ID-based filenames (for example `epic-001.md`) and store human-fr
 Accepted
 
 ### Context
-Development teams and AI agents need reliable context to connect generated outputs back to governance source and parent artifacts. Current generated sets include features `epic-001-feature-001.md`, `epic-001-feature-002.md`, `epic-002-feature-001.md` and prompts `epic-001-feature-001-prompt-001.md`, `epic-001-feature-001-prompt-002.md`, `epic-001-feature-001-prompt-003.md`.
+Development teams and AI agents need reliable context to connect generated outputs back to governance source and parent artifacts. Current generated sets include features `epic-001-feature-001.md`, `epic-001-feature-002.md`, `epic-002-feature-001.md` and prompts `epic-001-feature-001-prompt-001.md`, `epic-001-feature-001-prompt-002.md`, `epic-001-feature-002-prompt-001.md`.
 
 ### Decision
 Require front matter lineage fields (such as `derived_from_document_id`, `derived_from_epic`, `derived_from_feature`, and `source_path`) across generated artifacts.
@@ -133,6 +133,6 @@ Use deterministic fallback logic for epics/features/stories/prompts when AI gene
 - Output schema remains valid and traceable.
 
 ## Source Context
-- Governance source: `/Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md`
-- Input size: 678 characters
-- Artifact counts: epics=2, features=4, stories=45, prompts=45
+- Governance source: `/home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md`
+- Input size: 652 characters
+- Artifact counts: capabilities=2, epics=3, features=6, stories=12, prompts=12
