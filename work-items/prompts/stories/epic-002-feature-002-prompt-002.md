@@ -4,12 +4,12 @@ prompt_id: epic-002-feature-002-prompt-002
 story: epic-002-feature-002-story-002
 feature: epic-002-feature-002
 epic: epic-002
-source: specs/governance/original-document-system-of-record.digital.md
+source: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
 ---
 # AI Implementation Prompt: epic-002-feature-002-prompt-002
 
 ## Objective
-Implement Retrieve document metadata with role-based filtering.
+Implement Service and API Governance — Audit telemetry and evidence capture — operational evidence path.
 
 ## Repo Context
 - Primary code paths: src/cli/, src/pipeline/, src/config/
@@ -17,24 +17,21 @@ Implement Retrieve document metadata with role-based filtering.
 - Story linkage: epic-002-feature-002-story-002 -> epic-002-feature-002 -> epic-002
 
 ## Required Changes
-1. Implement Retrieve document metadata with role-based filtering.
-2. Implement field-level access control for metadata responses
-3. Create metadata filtering service that maps user roles to allowed metadata fields
-4. Store role-based metadata permissions in configuration or database
-5. Return consistent metadata schema regardless of user role (omit restricted fields)
+1. Implement Service and API Governance — Audit telemetry and evidence capture — operational evidence path.
+2. Apply least-privilege authorization checks for the operational evidence path.
+3. Ensure structured logs for the operational evidence path are queryable for compliance evidence.
+4. Implementation should prioritize The API exposes read-only access:.
 
 ## Constraints
 - Preserve traceability metadata and naming conventions for generated artifacts.
 - Do not modify files under /docs/organizational-contracts without explicit instruction.
 - Keep changes scoped to the requested objective and avoid unrelated refactors.
-- Use governance source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
+- Use governance source: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
 
 ## Acceptance Criteria
-- GET /documents/{documentId}/metadata returns 200 with metadata JSON when user has read permission
-- GET /documents/{documentId}/metadata returns 403 when user lacks metadata read permission
-- Response includes only metadata fields the user's role is permitted to view
-- Metadata includes document ID, upload timestamp, file size, content type, and custom properties
-- Sensitive metadata fields are filtered out based on user role permissions
+- Behavior for the operational evidence path records timestamped evidence with actor identity attribution.
+- Audit and security events for the operational evidence path are written to secure, access-controlled logging or storage.
+- Automated tests validate success, failure, and evidence-capture behavior for the operational evidence path.
 - Outcome focus for this story: The API exposes read-only access:.
 
 ## Validation
@@ -45,15 +42,13 @@ Implement Retrieve document metadata with role-based filtering.
 Return a patch plus a short summary of modified files and validation results.
 
 ## Implementation Brief
-Implement Retrieve document metadata with role-based filtering.
-Context: I want to fetch document metadata via GET /documents/{documentId}/metadata endpoint.
+Implement Service and API Governance — Audit telemetry and evidence capture — operational evidence path.
+Context: enforce service and api governance — audit telemetry and evidence capture for the operational evidence path.
 Return production-ready code changes, unit tests, and integration tests with explicit acceptance-criteria mapping.
 
 ## Implementation Checklist
-- GET /documents/{documentId}/metadata returns 200 with metadata JSON when user has read permission
-- GET /documents/{documentId}/metadata returns 403 when user lacks metadata read permission
-- Response includes only metadata fields the user's role is permitted to view
-- Metadata includes document ID, upload timestamp, file size, content type, and custom properties
-- Sensitive metadata fields are filtered out based on user role permissions
+- Behavior for the operational evidence path records timestamped evidence with actor identity attribution.
+- Audit and security events for the operational evidence path are written to secure, access-controlled logging or storage.
+- Automated tests validate success, failure, and evidence-capture behavior for the operational evidence path.
 - Outcome focus for this story: The API exposes read-only access:.
-- Implementation outcome is unique to epic-002-feature-002-story-002 (Retrieve document metadata with role-based filtering).
+- Implementation outcome is unique to epic-002-feature-002-story-002 (Service and API Governance — Audit telemetry and evidence capture — operational evidence path).

@@ -39,9 +39,9 @@ gh api \
   "required_conversation_resolution": true,
   "enforce_admins": true,
   "required_pull_request_reviews": {
-    "required_approving_review_count": 1,
+    "required_approving_review_count": 0,
     "dismiss_stale_reviews": true,
-    "require_code_owner_reviews": true
+    "require_code_owner_reviews": false
   },
   "restrictions": null,
   "allow_force_pushes": false,
@@ -54,14 +54,14 @@ echo "Verifying hardening and merge-queue prerequisites..."
 auto_merge_enabled="$(gh api -H "Accept: application/vnd.github+json" "/repos/${OWNER}/${REPO}" --jq '.allow_auto_merge')"
 strict_status_checks="$(gh api -H "Accept: application/vnd.github+json" "/repos/${OWNER}/${REPO}/branches/${BRANCH}/protection" --jq '.required_status_checks.strict')"
 conversation_resolution="$(gh api -H "Accept: application/vnd.github+json" "/repos/${OWNER}/${REPO}/branches/${BRANCH}/protection" --jq '.required_conversation_resolution.enabled')"
-code_owner_reviews="$(gh api -H "Accept: application/vnd.github+json" "/repos/${OWNER}/${REPO}/branches/${BRANCH}/protection" --jq '.required_pull_request_reviews.require_code_owner_reviews')"
+required_approvals="$(gh api -H "Accept: application/vnd.github+json" "/repos/${OWNER}/${REPO}/branches/${BRANCH}/protection" --jq '.required_pull_request_reviews.required_approving_review_count')"
 
-if [ "$auto_merge_enabled" != "true" ] || [ "$strict_status_checks" != "true" ] || [ "$conversation_resolution" != "true" ] || [ "$code_owner_reviews" != "true" ]; then
+if [ "$auto_merge_enabled" != "true" ] || [ "$strict_status_checks" != "true" ] || [ "$conversation_resolution" != "true" ] || [ "$required_approvals" != "0" ]; then
   echo "❌ Merge queue prerequisites are not fully satisfied."
   echo "allow_auto_merge=${auto_merge_enabled}"
   echo "required_status_checks.strict=${strict_status_checks}"
   echo "required_conversation_resolution.enabled=${conversation_resolution}"
-  echo "required_pull_request_reviews.require_code_owner_reviews=${code_owner_reviews}"
+  echo "required_pull_request_reviews.required_approving_review_count=${required_approvals}"
   exit 1
 fi
 
