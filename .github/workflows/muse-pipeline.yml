@@ -13,12 +13,27 @@ on:
 jobs:
   muse-pipeline:
     runs-on: ubuntu-latest
-
     steps:
+      - name: Create GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@d72941d797fd3113feb6b93fd0dec494b13a2547 # v1
+        with:
+          app-id: ${{ secrets.MUSE_APP_ID }}
+          private-key: ${{ secrets.MUSE_APP_PRIVATE_KEY }}
+          owner: BIASEDFRAMEWORK
+          repositories: Muse
+
       - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 0
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Verify app auth
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          gh api /repos/BIASEDFRAMEWORK/Muse --jq '.full_name'
 
       - name: Setup Node
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -51,6 +66,8 @@ jobs:
 
       - name: Commit generated artifacts
         uses: stefanzweifel/git-auto-commit-action@b863ae1933cb653a53c021fe36dbb774e1fb9403 # v5
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         with:
           commit_message: 'muse: generated backlog artifacts'
           file_pattern: docs/**
@@ -58,6 +75,7 @@ jobs:
       - name: Create pull request
         uses: peter-evans/create-pull-request@22a9089034f40e5a961c8808d113e2c98fb63676 # v7
         with:
+          token: ${{ steps.app-token.outputs.token }}
           commit-message: 'muse: generated backlog artifacts'
           title: 'muse: generated backlog artifacts'
           body: 'Automated Muse pipeline output updates from governance document changes.'
