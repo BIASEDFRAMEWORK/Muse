@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   autoapprove:
-    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    if: github.event.pull_request.user.login == 'dependabot[bot]' || github.event.pull_request.user.login == 'dependabot'
     runs-on: ubuntu-latest
     steps:
       - name: Approve clean Dependabot PR and enable auto-merge
@@ -48,7 +48,7 @@ jobs:
             }
 
             const reviews = await github.rest.pulls.listReviews({ owner, repo, pull_number, per_page: 100 });
-            const alreadyApproved = reviews.data.some((review) => review.user?.login === 'prbotformuse2[bot]' && review.state === 'APPROVED');
+            const alreadyApproved = reviews.data.some((review) => review.state === 'APPROVED');
 
             if (!alreadyApproved) {
               await github.rest.pulls.createReview({
@@ -60,13 +60,33 @@ jobs:
               });
             }
 
-            await github.graphql(
-              `mutation EnableAutoMerge($pullRequestId: ID!) {
-                enablePullRequestAutoMerge(input: {pullRequestId: $pullRequestId, mergeMethod: SQUASH}) {
-                  pullRequest { number }
+            let autoMergeEnabled = false;
+            for (let attempt = 1; attempt <= 8; attempt++) {
+              try {
+                await github.graphql(
+                  `mutation EnableAutoMerge($pullRequestId: ID!) {
+                    enablePullRequestAutoMerge(input: {pullRequestId: $pullRequestId, mergeMethod: SQUASH}) {
+                      pullRequest { number }
+                    }
+                  }`,
+                  { pullRequestId: pr.node_id }
+                );
+                autoMergeEnabled = true;
+                break;
+              } catch (error) {
+                const message = String(error?.message || '');
+                const transient = message.includes('unstable status') || message.includes('is in unstable status');
+                if (!transient) {
+                  throw error;
                 }
-              }`,
-              { pullRequestId: pr.node_id }
-            );
+                core.info(`Auto-merge not ready yet for PR #${pull_number} (attempt ${attempt}/8). Retrying...`);
+                await new Promise((resolve) => setTimeout(resolve, 10000));
+              }
+            }
+
+            if (!autoMergeEnabled) {
+              core.warning(`Approved PR #${pull_number}, but auto-merge is still pending due to transient unstable status.`);
+              return;
+            }
 
             core.info(`Approved and enabled auto-merge for PR #${pull_number}`);
