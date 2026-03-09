@@ -28,15 +28,37 @@ python3 -m pip install markitdown
 ```bash
 muse init
 muse apply
+muse apply --fast
+muse apply --demo
 muse convertMD <file>
 muse deriveArtifacts <markdown>
+muse deriveArtifacts <markdown> --fast
 muse decisions <markdown>
 muse todo <markdown>
 muse run <file>
 muse explain <artifact>
 muse trace <artifact>
 muse commit [--pr]
+muse pr [prompt]
+muse filter-digital-content <markdown>
 ```
+
+## Command reference
+
+| Command | Purpose | Key options / args |
+|---|---|---|
+| `muse init` | Create `muse.yaml` scaffold | none |
+| `muse apply` | Execute declarative pipeline from `muse.yaml` | `--fast`, `--demo` |
+| `muse convertMD <file>` | Convert source document into markdown under `specs/governance/` | `<file>` |
+| `muse deriveArtifacts <markdown>` | Generate capabilities, epics, features, stories, prompts | `<markdown>`, `--fast` |
+| `muse decisions <markdown>` | Generate architecture/product decision document | `<markdown>` |
+| `muse todo <markdown>` | Generate prioritized TODO backlog from artifacts | `<markdown>` |
+| `muse run <file>` | Run convert + derive + decisions + todo in one command | `<file>` |
+| `muse explain <artifact>` | Explain purpose/origin/guidance/security implications of an artifact | `<artifact>` |
+| `muse trace <artifact>` | Show lineage from artifact back to source governance | `<artifact>` |
+| `muse commit` | Stage docs and generated artifacts and create commit | `--pr` |
+| `muse pr [prompt]` | Create branch, commit artifacts, and open template-driven PR | optional `[prompt]` |
+| `muse filter-digital-content <markdown>` | Keep only digital-system requirements from governance markdown | `<markdown>` |
 
 ## Declarative config
 
