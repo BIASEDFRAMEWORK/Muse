@@ -88,8 +88,8 @@ ai:
 - `specs/epics/`
 - `specs/features/`
 - `specs/stories/`
-- `work-items/prompts/stories/`
 - `specs/decisions/`
+- `work-items/prompts/stories/`
 - `work-items/tasks/`
 
 ## Notes
