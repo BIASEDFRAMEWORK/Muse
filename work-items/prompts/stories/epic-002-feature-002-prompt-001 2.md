@@ -1,23 +1,23 @@
 ---
-id: epic-003-feature-002-prompt-001
-prompt_id: epic-003-feature-002-prompt-001
-story: epic-003-feature-002-story-001
-feature: epic-003-feature-002
-epic: epic-003
+id: epic-002-feature-002-prompt-001
+prompt_id: epic-002-feature-002-prompt-001
+story: epic-002-feature-002-story-001
+feature: epic-002-feature-002
+epic: epic-002
 source: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
 ---
-# AI Implementation Prompt: epic-003-feature-002-prompt-001
+# AI Implementation Prompt: epic-002-feature-002-prompt-001
 
 ## Objective
-Implement Retrieval (Read-only) — Audit telemetry and evidence capture — implementation path.
+Implement Service and API Governance — Audit telemetry and evidence capture — implementation path.
 
 ## Repo Context
 - Primary code paths: src/cli/, src/pipeline/, src/config/
 - Generated artifacts: specs/capabilities/, specs/epics/, specs/features/, specs/stories/, work-items/prompts/stories/
-- Story linkage: epic-003-feature-002-story-001 -> epic-003-feature-002 -> epic-003
+- Story linkage: epic-002-feature-002-story-001 -> epic-002-feature-002 -> epic-002
 
 ## Required Changes
-1. Implement Retrieval (Read-only) — Audit telemetry and evidence capture — implementation path.
+1. Implement Service and API Governance — Audit telemetry and evidence capture — implementation path.
 2. Apply least-privilege authorization checks for the implementation path.
 3. Ensure structured logs for the implementation path are queryable for compliance evidence.
 4. Implementation should prioritize The API exposes read-only access:.
@@ -42,8 +42,8 @@ Implement Retrieval (Read-only) — Audit telemetry and evidence capture — imp
 Return a patch plus a short summary of modified files and validation results.
 
 ## Implementation Brief
-Implement Retrieval (Read-only) — Audit telemetry and evidence capture — implementation path.
-Context: enforce retrieval (read-only) — audit telemetry and evidence capture for the implementation path.
+Implement Service and API Governance — Audit telemetry and evidence capture — implementation path.
+Context: enforce service and api governance — audit telemetry and evidence capture for the implementation path.
 Return production-ready code changes, unit tests, and integration tests with explicit acceptance-criteria mapping.
 
 ## Implementation Checklist
@@ -51,4 +51,4 @@ Return production-ready code changes, unit tests, and integration tests with exp
 - Audit and security events for the implementation path are written to secure, access-controlled logging or storage.
 - Automated tests validate success, failure, and evidence-capture behavior for the implementation path.
 - Outcome focus for this story: The API exposes read-only access:.
-- Implementation outcome is unique to epic-003-feature-002-story-001 (Retrieval (Read-only) — Audit telemetry and evidence capture — implementation path).
+- Implementation outcome is unique to epic-002-feature-002-story-001 (Service and API Governance — Audit telemetry and evidence capture — implementation path).

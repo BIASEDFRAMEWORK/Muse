@@ -1,6 +1,6 @@
 ---
 document_id: gov-original-document-system-of-record
-source_path: /home/runner/work/Muse/Muse/docs/governance/original-document-system-of-record.md
+source_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/docs/governance/original-document-system-of-record.md
 ---
 
 # Digital Governance Extract

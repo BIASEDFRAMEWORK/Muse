@@ -1,14 +1,11 @@
 project: system-access-logging
-
 governance:
   source: docs/governance/original-document-system-of-record.md
-
 pipeline:
   convert_markdown: true
   derive_artifacts: true
   decisions: true
   todo: true
-
 ai:
   provider: anthropic
   model: claude-sonnet-4-20250514

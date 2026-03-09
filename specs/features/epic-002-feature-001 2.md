@@ -8,21 +8,21 @@ source_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governa
 derived_from_document_id: gov-original-document-system-of-record
 origin_markdown_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
 ---
-# Cryptographic Hash-Based Document Integrity Verification
+# JWT-based Document Access Authentication
 
 ## Capability
-Generate and validate SHA-256 hashes for all stored documents to ensure immutability and detect tampering attempts
+Secure authentication system for document retrieval using JSON Web Tokens with role-based permissions
 
 ## Implementation Notes
-- Calculate SHA-256 hash during document ingestion and store alongside metadata
-- Implement hash verification on every document retrieval request
-- Create background job to periodically verify hash integrity of stored documents
-- Log hash verification failures as security incidents with alerting
+- Implement JWT token validation middleware for all document endpoints
+- Create role hierarchy (viewer, auditor, admin) with document-level permissions
+- Token expiration set to configurable timeframe (default 1 hour)
+- Include document access scope claims in JWT payload
 - Primary delivery slice: The API exposes read-only access:.
 
 ## Acceptance Criteria
-- System generates SHA-256 hash for each document upon storage
-- Document retrieval fails with 409 Conflict if hash verification fails
-- Hash verification runs automatically every 24 hours for all stored documents
-- Security alerts are triggered within 5 minutes of hash mismatch detection
+- Valid JWT tokens grant access to authorized documents only
+- Expired or invalid tokens return HTTP 401 Unauthorized
+- Role permissions correctly restrict access based on user type
+- Token validation completes within 50ms for 95% of requests
 - Control focus for this feature: The API exposes read-only access:.

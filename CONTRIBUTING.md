@@ -25,7 +25,10 @@ expect contributors to follow.
 - Build CLI: `npm run build`
 - Initialize config: `npm run muse:init`
 - Run full pipeline: `node dist/cli/index.js apply`
+- Run single-prompt ship flow: `node dist/cli/index.js ship <promptPath> --muse-id <MUSE-ID>`
 - Validate traceability: `npm run traceability:check`
+
+`muse run` is removed; use `muse prompt execute`, `muse prompt verify`, `muse task complete`, and `muse ship`.
 
 ## Making changes / PR checklist
 

@@ -26,7 +26,12 @@ const commandHelpCases = [
   ['deriveArtifacts'],
   ['decisions'],
   ['todo'],
-  ['run'],
+  ['prompt'],
+  ['prompt', 'execute'],
+  ['prompt', 'verify'],
+  ['task'],
+  ['task', 'complete'],
+  ['ship'],
   ['explain'],
   ['trace'],
   ['commit'],
@@ -34,9 +39,9 @@ const commandHelpCases = [
   ['filter-digital-content'],
 ]
 
-for (const [command] of commandHelpCases) {
-  test(`cli command help works: ${command}`, () => {
-    const result = runCli([command, '--help'])
+for (const commandArgs of commandHelpCases) {
+  test(`cli command help works: ${commandArgs.join(' ')}`, () => {
+    const result = runCli([...commandArgs, '--help'])
     assert.equal(result.status, 0, result.stderr || result.stdout)
   })
 }

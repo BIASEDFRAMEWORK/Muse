@@ -8,6 +8,7 @@ Quick start
 - Build CLI: `npm run build`
 - Initialize config: `node dist/cli/index.js init` (or `muse init` after install/link)
 - Run declarative pipeline: `node dist/cli/index.js apply`
+- Prototype ship flow: `node dist/cli/index.js ship <promptPath> --muse-id <MUSE-ID>`
 
 Primary architecture
 - `src/cli/` — commander entrypoint and command handlers
@@ -32,3 +33,5 @@ Engineering constraints
 - Keep outputs deterministic when no API key is configured.
 - Preserve traceability metadata in artifact front matter.
 - Do NOT modify files under `/docs/organizational-contracts` without explicit instruction.
+- `muse run` is removed; use `muse prompt execute`, `muse prompt verify`, `muse task complete`, and `muse ship`.
+- Commit messages for shipped changes must start with `<MUSE-ID>:`.

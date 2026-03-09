@@ -8,7 +8,11 @@ export function traceArtifact(artifact: string): string {
   let source = current.data.source ? String(current.data.source) : ''
 
   const storyRef = current.data.story ? String(current.data.story) : ''
-  if ((!feature || !epic) && storyRef) {
+  if (storyRef) {
+    userStoryId = storyRef
+  }
+
+  if ((!feature || !epic || storyRef) && storyRef) {
     try {
       const story = resolveArtifactByIdOrPath(storyRef)
       userStoryId = String(story.data.id || storyRef)

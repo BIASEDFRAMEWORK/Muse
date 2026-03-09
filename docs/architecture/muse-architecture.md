@@ -27,7 +27,7 @@ H --> I[AI Engineering Prompts]
 
 I --> J[Implementation Tasks<br>TODO Backlog]
 
-J --> K[GitHub Pull Request]
+J --> K[muse ship<br>branch + execute + verify + complete + PR]
 
 K --> L[Engineering Review<br>Branch Protection + CODEOWNERS]
 
@@ -144,6 +144,19 @@ GitHub Actions Validation
 ```
 
 Engineering teams review governance-derived work using the same collaboration model used for code.
+
+---
+
+## Prototype Single-Prompt Ship Flow
+
+The prototype canonical flow is:
+
+1. `muse prompt execute <promptPath> [--muse-id <id>]`
+2. `muse prompt verify <promptPath> [--muse-id <id>]`
+3. `muse task complete <MUSE-ID>`
+4. `muse ship <promptPath> --muse-id <MUSE-ID>`
+
+`muse run` is intentionally removed with no backward compatibility in this prototype.
 
 ---
 

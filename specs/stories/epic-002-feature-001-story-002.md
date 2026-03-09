@@ -5,23 +5,28 @@ epic: epic-002
 feature: epic-002-feature-001
 derived_from_epic: epic-002
 derived_from_feature: epic-002-feature-001
-source: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
-source_path: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
+source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
+source_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
 derived_from_document_id: gov-original-document-system-of-record
-origin_markdown_path: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
+origin_markdown_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
 ---
-# Service and API Governance — Authorization enforcement — operational evidence path
+# Verify document integrity against stored hash on retrieval
 
 ## User Story
-As a system, I must perform enforce service and api governance — authorization enforcement for the operational evidence path so that governance requirements are satisfied.
+As a system, I must perform compute real-time hash of stored document and compare against original stored hash when document is accessed so that governance requirements are satisfied.
 
 ## Acceptance Criteria
-- Behavior for the operational evidence path records timestamped evidence with actor identity attribution.
-- Audit and security events for the operational evidence path are written to secure, access-controlled logging or storage.
-- Automated tests validate success, failure, and evidence-capture behavior for the operational evidence path.
+- Hash verification occurs on every GET /documents/{documentId} request
+- Verification result is logged with timestamp and requesting actor identity
+- Hash mismatch triggers integrity violation alert and access denial
+- Verification success allows normal document streaming to proceed
+- Automated tests validate detection of corrupted documents
 - Outcome focus for this story: The API exposes read-only access:.
 
 ## Technical Notes
-- Apply least-privilege authorization checks for the operational evidence path.
-- Ensure structured logs for the operational evidence path are queryable for compliance evidence.
+- Implement hash verification middleware in retrieval pipeline
+- Use same SHA-256 algorithm as generation for consistency
+- Log all verification attempts to security audit log
+- Return HTTP 409 Conflict for integrity violations
+- Include verification timestamp in response headers
 - Implementation should prioritize The API exposes read-only access:.

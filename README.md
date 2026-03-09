@@ -8,7 +8,8 @@ Muse is a CLI pipeline that converts governance documents into engineering artif
 2. Derives epics, features, user stories, and AI prompts
 3. Generates architecture/product decision documents
 4. Builds a prioritized TODO backlog
-5. Supports explainability and traceability from CLI
+5. Ships a single prompt through branch → verify → PR flow
+6. Supports explainability and traceability from CLI
 
 ## Install
 
@@ -32,11 +33,17 @@ muse convertMD <file>
 muse deriveArtifacts <markdown>
 muse decisions <markdown>
 muse todo <markdown>
-muse run <file>
+muse prompt execute <promptPath> [--muse-id <id>]
+muse prompt verify <promptPath> [--muse-id <id>]
+muse task complete <MUSE-ID>
+muse ship <promptPath> --muse-id <MUSE-ID> [--base main] [--auto-merge] [--delete-branch]
 muse explain <artifact>
 muse trace <artifact>
 muse commit [--pr]
+muse pr [promptPath] --muse-id <MUSE-ID>
 ```
+
+`muse run` has been removed. The canonical prototype flow is `muse ship ...`.
 
 ## Declarative config
 

@@ -209,4 +209,94 @@ export class LlmClient {
       return fallback
     }
   }
+
+  async generateText(prompt: string, fallback: string, meta: GenerationMeta = {}): Promise<string> {
+    const label = meta.label || 'unnamed-text'
+    const maxTokens = meta.maxTokens ?? 2200
+    const started = Date.now()
+
+    if (!this.client) {
+      this.appendUsageLog({
+        timestamp: new Date().toISOString(),
+        provider: this.config.provider,
+        model: this.config.model,
+        label,
+        usedAi: false,
+        fallbackReason: 'no_client',
+        message: 'AI client not configured; using fallback text.',
+        durationMs: Date.now() - started,
+        itemCount: 1,
+      })
+      process.stdout.write(`[llm:${label}] fallback(no_client)\n`)
+      return fallback
+    }
+
+    try {
+      const response = await this.client.messages.create({
+        model: this.config.model,
+        max_tokens: maxTokens,
+        messages: [{ role: 'user', content: prompt }],
+      })
+
+      const text = response.content
+        .filter((block) => block.type === 'text')
+        .map((block) => (block.type === 'text' ? block.text : ''))
+        .join('\n')
+        .trim()
+
+      if (!text) {
+        this.appendUsageLog({
+          timestamp: new Date().toISOString(),
+          provider: this.config.provider,
+          model: this.config.model,
+          label,
+          usedAi: false,
+          fallbackReason: 'invalid_response',
+          message: 'No text content in model response.',
+          durationMs: Date.now() - started,
+          itemCount: 1,
+          usage: {
+            inputTokens: response.usage?.input_tokens,
+            outputTokens: response.usage?.output_tokens,
+          },
+        })
+        process.stdout.write(`[llm:${label}] fallback(invalid_response)\n`)
+        return fallback
+      }
+
+      this.appendUsageLog({
+        timestamp: new Date().toISOString(),
+        provider: this.config.provider,
+        model: this.config.model,
+        label,
+        usedAi: true,
+        fallbackReason: null,
+        message: null,
+        durationMs: Date.now() - started,
+        itemCount: 1,
+        usage: {
+          inputTokens: response.usage?.input_tokens,
+          outputTokens: response.usage?.output_tokens,
+        },
+      })
+      process.stdout.write(`[llm:${label}] ai(text)\n`)
+      return text
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error)
+      const reason = this.classifyError(message)
+      this.appendUsageLog({
+        timestamp: new Date().toISOString(),
+        provider: this.config.provider,
+        model: this.config.model,
+        label,
+        usedAi: false,
+        fallbackReason: reason,
+        message,
+        durationMs: Date.now() - started,
+        itemCount: 1,
+      })
+      process.stdout.write(`[llm:${label}] fallback(${reason})\n`)
+      return fallback
+    }
+  }
 }

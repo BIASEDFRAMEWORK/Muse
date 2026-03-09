@@ -4,12 +4,12 @@ prompt_id: epic-002-feature-001-prompt-002
 story: epic-002-feature-001-story-002
 feature: epic-002-feature-001
 epic: epic-002
-source: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
+source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
 ---
 # AI Implementation Prompt: epic-002-feature-001-prompt-002
 
 ## Objective
-Implement Service and API Governance — Authorization enforcement — operational evidence path.
+Implement Verify document integrity against stored hash on retrieval.
 
 ## Repo Context
 - Primary code paths: src/cli/, src/pipeline/, src/config/
@@ -17,21 +17,24 @@ Implement Service and API Governance — Authorization enforcement — operation
 - Story linkage: epic-002-feature-001-story-002 -> epic-002-feature-001 -> epic-002
 
 ## Required Changes
-1. Implement Service and API Governance — Authorization enforcement — operational evidence path.
-2. Apply least-privilege authorization checks for the operational evidence path.
-3. Ensure structured logs for the operational evidence path are queryable for compliance evidence.
-4. Implementation should prioritize The API exposes read-only access:.
+1. Implement Verify document integrity against stored hash on retrieval.
+2. Implement hash verification middleware in retrieval pipeline
+3. Use same SHA-256 algorithm as generation for consistency
+4. Log all verification attempts to security audit log
+5. Return HTTP 409 Conflict for integrity violations
 
 ## Constraints
 - Preserve traceability metadata and naming conventions for generated artifacts.
 - Do not modify files under /docs/organizational-contracts without explicit instruction.
 - Keep changes scoped to the requested objective and avoid unrelated refactors.
-- Use governance source: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
+- Use governance source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
 
 ## Acceptance Criteria
-- Behavior for the operational evidence path records timestamped evidence with actor identity attribution.
-- Audit and security events for the operational evidence path are written to secure, access-controlled logging or storage.
-- Automated tests validate success, failure, and evidence-capture behavior for the operational evidence path.
+- Hash verification occurs on every GET /documents/{documentId} request
+- Verification result is logged with timestamp and requesting actor identity
+- Hash mismatch triggers integrity violation alert and access denial
+- Verification success allows normal document streaming to proceed
+- Automated tests validate detection of corrupted documents
 - Outcome focus for this story: The API exposes read-only access:.
 
 ## Validation
@@ -42,13 +45,15 @@ Implement Service and API Governance — Authorization enforcement — operation
 Return a patch plus a short summary of modified files and validation results.
 
 ## Implementation Brief
-Implement Service and API Governance — Authorization enforcement — operational evidence path.
-Context: enforce service and api governance — authorization enforcement for the operational evidence path.
+Implement Verify document integrity against stored hash on retrieval.
+Context: compute real-time hash of stored document and compare against original stored hash when document is accessed.
 Return production-ready code changes, unit tests, and integration tests with explicit acceptance-criteria mapping.
 
 ## Implementation Checklist
-- Behavior for the operational evidence path records timestamped evidence with actor identity attribution.
-- Audit and security events for the operational evidence path are written to secure, access-controlled logging or storage.
-- Automated tests validate success, failure, and evidence-capture behavior for the operational evidence path.
+- Hash verification occurs on every GET /documents/{documentId} request
+- Verification result is logged with timestamp and requesting actor identity
+- Hash mismatch triggers integrity violation alert and access denial
+- Verification success allows normal document streaming to proceed
+- Automated tests validate detection of corrupted documents
 - Outcome focus for this story: The API exposes read-only access:.
-- Implementation outcome is unique to epic-002-feature-001-story-002 (Service and API Governance — Authorization enforcement — operational evidence path).
+- Implementation outcome is unique to epic-002-feature-001-story-002 (Verify document integrity against stored hash on retrieval).

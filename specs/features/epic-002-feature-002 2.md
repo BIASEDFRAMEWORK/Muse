@@ -8,21 +8,21 @@ source_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governa
 derived_from_document_id: gov-original-document-system-of-record
 origin_markdown_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
 ---
-# Role-Based Document Access Control with JWT Authentication
+# Document Access Audit Logging
 
 ## Capability
-Enforce granular access permissions using JWT tokens with role-based claims for document retrieval operations
+Comprehensive audit trail capturing all document access attempts and metadata retrieval events
 
 ## Implementation Notes
-- Implement JWT middleware to validate bearer tokens on all API endpoints
-- Define role hierarchy (admin, auditor, viewer) with corresponding document access levels
-- Store document-level access control lists (ACLs) in metadata database
-- Cache validated JWT claims for 15 minutes to reduce authentication overhead
+- Log structured events to dedicated audit database table
+- Capture timestamp, user ID, document ID, IP address, and action type
+- Include response status codes and error details for failed attempts
+- Implement async logging to prevent performance impact on API responses
 - Primary delivery slice: The API exposes read-only access:.
 
 ## Acceptance Criteria
-- API returns 401 Unauthorized for requests without valid JWT tokens
-- Users can only access documents matching their role permissions
-- Document metadata includes access control information
-- JWT token expiration is enforced with automatic session termination
+- All GET requests to document endpoints generate audit log entries
+- Audit logs include required fields without PII exposure
+- Failed authentication attempts are logged with reason codes
+- Audit log retention period configurable (minimum 90 days)
 - Control focus for this feature: The API exposes read-only access:.

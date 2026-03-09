@@ -5,23 +5,28 @@ epic: epic-001
 feature: epic-001-feature-001
 derived_from_epic: epic-001
 derived_from_feature: epic-001-feature-001
-source: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
-source_path: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
+source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
+source_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
 derived_from_document_id: gov-original-document-system-of-record
-origin_markdown_path: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
+origin_markdown_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
 ---
-# Access Control and Authorization — Authorization enforcement — operational evidence path
+# Enforce read-only API constraint for document content endpoints
 
 ## User Story
-As a system, I must perform enforce access control and authorization — authorization enforcement for the operational evidence path so that governance requirements are satisfied.
+As a system, I must perform reject all HTTP methods except GET for document content endpoints and log unauthorized modification attempts so that governance requirements are satisfied.
 
 ## Acceptance Criteria
-- Behavior for the operational evidence path records timestamped evidence with actor identity attribution.
-- Audit and security events for the operational evidence path are written to secure, access-controlled logging or storage.
-- Automated tests validate success, failure, and evidence-capture behavior for the operational evidence path.
+- Must return 405 Method Not Allowed for POST, PUT, PATCH, DELETE requests to document endpoints
+- Must log unauthorized modification attempts with timestamp, caller identity, attempted method, and document ID
+- Must maintain audit trail of all rejected modification attempts in secure storage
+- Must include actor identity attribution in all rejection logs
+- Automated tests must verify proper HTTP method restrictions across all document endpoints
+- Must generate timestamped evidence of system's read-only enforcement behavior
 - Outcome focus for this story: The API exposes read-only access:.
 
 ## Technical Notes
-- Apply least-privilege authorization checks for the operational evidence path.
-- Ensure structured logs for the operational evidence path are queryable for compliance evidence.
+- Configure web server or API gateway to block non-GET methods at infrastructure level
+- Implement centralized logging for all method-based rejections
+- Use structured logging format for automated compliance reporting
+- Include request fingerprinting in logs for forensic analysis
 - Implementation should prioritize The API exposes read-only access:.

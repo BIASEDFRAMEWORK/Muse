@@ -3,23 +3,26 @@ id: epic-001-feature-002
 feature_id: epic-001-feature-002
 epic: epic-001
 derived_from_epic: epic-001
-source: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
-source_path: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
+source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
+source_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
 derived_from_document_id: gov-original-document-system-of-record
-origin_markdown_path: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
+origin_markdown_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
 ---
-# Access Control and Authorization — Audit telemetry and evidence capture
+# Metadata Retrieval with Audit Logging
 
 ## Capability
-Implement measurable controls supporting access control and authorization with a focus on audit telemetry and evidence capture.
+Expose document metadata through dedicated endpoint with comprehensive access auditing
 
 ## Implementation Notes
-- Expose service boundaries for audit telemetry and evidence capture with explicit interfaces.
-- Capture operational telemetry required for audit telemetry and evidence capture.
+- Return structured JSON metadata including creation time, checksum, and access permissions
+- Log all metadata access attempts with user ID, document ID, timestamp, and IP address
+- Implement metadata caching with TTL to reduce database load
+- Include document classification level in metadata response for access decisions
 - Primary delivery slice: The API exposes read-only access:.
 
 ## Acceptance Criteria
-- Given required audit telemetry and evidence capture rules, protected operations enforce policy correctly.
-- Given violations in audit telemetry and evidence capture, requests are blocked and evidence is recorded.
-- Automated tests cover success, failure, and observability for audit telemetry and evidence capture.
+- GET /documents/{documentId}/metadata returns JSON with creation_time, checksum, size, and permissions
+- All metadata requests are logged to audit trail within 1 second
+- Cached metadata responses serve within 50ms for frequently accessed documents
+- Metadata includes document classification and user's access level for that document
 - Control focus for this feature: The API exposes read-only access:.

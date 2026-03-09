@@ -4,12 +4,12 @@ prompt_id: epic-001-feature-001-prompt-001
 story: epic-001-feature-001-story-001
 feature: epic-001-feature-001
 epic: epic-001
-source: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
+source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
 ---
 # AI Implementation Prompt: epic-001-feature-001-prompt-001
 
 ## Objective
-Implement Access Control and Authorization — Authorization enforcement — implementation path.
+Implement Stream original document bytes with access control validation.
 
 ## Repo Context
 - Primary code paths: src/cli/, src/pipeline/, src/config/
@@ -17,21 +17,25 @@ Implement Access Control and Authorization — Authorization enforcement — imp
 - Story linkage: epic-001-feature-001-story-001 -> epic-001-feature-001 -> epic-001
 
 ## Required Changes
-1. Implement Access Control and Authorization — Authorization enforcement — implementation path.
-2. Apply least-privilege authorization checks for the implementation path.
-3. Ensure structured logs for the implementation path are queryable for compliance evidence.
-4. Implementation should prioritize The API exposes read-only access:.
+1. Implement Stream original document bytes with access control validation.
+2. Implement streaming response to handle large documents without memory constraints
+3. Use secure HTTP headers to prevent content caching in unauthorized locations
+4. Log all access attempts to tamper-evident storage with cryptographic integrity
+5. Include document content hash in access logs for integrity verification
 
 ## Constraints
 - Preserve traceability metadata and naming conventions for generated artifacts.
 - Do not modify files under /docs/organizational-contracts without explicit instruction.
 - Keep changes scoped to the requested objective and avoid unrelated refactors.
-- Use governance source: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
+- Use governance source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
 
 ## Acceptance Criteria
-- Behavior for the implementation path records timestamped evidence with actor identity attribution.
-- Audit and security events for the implementation path are written to secure, access-controlled logging or storage.
-- Automated tests validate success, failure, and evidence-capture behavior for the implementation path.
+- Must validate caller authentication before streaming any document content
+- Must log access attempt with timestamp, caller identity, document ID, and outcome to secure audit storage
+- Must stream document bytes only after successful authorization check
+- Must generate 403 Forbidden response with logged details when access is denied
+- Must create timestamped evidence record of successful document retrieval including caller identity and document hash
+- Automated tests must verify access control enforcement for both authorized and unauthorized requests
 - Outcome focus for this story: The API exposes read-only access:.
 
 ## Validation
@@ -42,13 +46,16 @@ Implement Access Control and Authorization — Authorization enforcement — imp
 Return a patch plus a short summary of modified files and validation results.
 
 ## Implementation Brief
-Implement Access Control and Authorization — Authorization enforcement — implementation path.
-Context: enforce access control and authorization — authorization enforcement for the implementation path.
+Implement Stream original document bytes with access control validation.
+Context: validate access permissions and stream original document bytes through authenticated API endpoint.
 Return production-ready code changes, unit tests, and integration tests with explicit acceptance-criteria mapping.
 
 ## Implementation Checklist
-- Behavior for the implementation path records timestamped evidence with actor identity attribution.
-- Audit and security events for the implementation path are written to secure, access-controlled logging or storage.
-- Automated tests validate success, failure, and evidence-capture behavior for the implementation path.
+- Must validate caller authentication before streaming any document content
+- Must log access attempt with timestamp, caller identity, document ID, and outcome to secure audit storage
+- Must stream document bytes only after successful authorization check
+- Must generate 403 Forbidden response with logged details when access is denied
+- Must create timestamped evidence record of successful document retrieval including caller identity and document hash
+- Automated tests must verify access control enforcement for both authorized and unauthorized requests
 - Outcome focus for this story: The API exposes read-only access:.
-- Implementation outcome is unique to epic-001-feature-001-story-001 (Access Control and Authorization — Authorization enforcement — implementation path).
+- Implementation outcome is unique to epic-001-feature-001-story-001 (Stream original document bytes with access control validation).
