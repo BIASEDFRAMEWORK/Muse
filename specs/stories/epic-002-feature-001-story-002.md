@@ -5,15 +5,22 @@ epic: epic-002
 feature: epic-002-feature-001
 derived_from_epic: epic-002
 derived_from_feature: epic-002-feature-001
-source: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
-source_path: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
+source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
+source_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
 derived_from_document_id: gov-original-document-system-of-record
-origin_markdown_path: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
+origin_markdown_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
+name: Role-Based Document Access Control — operational evidence path
+capability: CAP-002
+related_pr: null
+pr_status: null
+implementation_status: not-implemented
+progress: 0
+archived: false
 ---
-# Service and API Governance — Authorization enforcement — operational evidence path
+# Role-Based Document Access Control — operational evidence path
 
 ## User Story
-As a system, I must perform enforce service and api governance — authorization enforcement for the operational evidence path so that governance requirements are satisfied.
+As a system, I must perform enforce role-based document access control for the operational evidence path so that governance requirements are satisfied.
 
 ## Acceptance Criteria
 - Behavior for the operational evidence path records timestamped evidence with actor identity attribution.

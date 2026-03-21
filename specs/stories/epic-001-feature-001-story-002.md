@@ -5,23 +5,36 @@ epic: epic-001
 feature: epic-001-feature-001
 derived_from_epic: epic-001
 derived_from_feature: epic-001-feature-001
-source: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
-source_path: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
+source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
+source_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
 derived_from_document_id: gov-original-document-system-of-record
-origin_markdown_path: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
+origin_markdown_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
+name: Retrieve Document Metadata via GET Endpoint
+capability: CAP-001
+related_pr: null
+pr_status: null
+implementation_status: not-implemented
+progress: 0
+archived: false
 ---
-# Access Control and Authorization — Authorization enforcement — operational evidence path
+# Retrieve Document Metadata via GET Endpoint
 
 ## User Story
-As a system, I must perform enforce access control and authorization — authorization enforcement for the operational evidence path so that governance requirements are satisfied.
+As a system, I must perform return persisted document metadata through a read-only GET endpoint at /documents/{documentId}/metadata so that governance requirements are satisfied.
 
 ## Acceptance Criteria
-- Behavior for the operational evidence path records timestamped evidence with actor identity attribution.
-- Audit and security events for the operational evidence path are written to secure, access-controlled logging or storage.
-- Automated tests validate success, failure, and evidence-capture behavior for the operational evidence path.
+- GET /documents/{documentId}/metadata returns JSON with upload timestamp, file size, content type, and checksum
+- Response includes actor identity who originally uploaded the document
+- Metadata access is logged with timestamp and requesting actor identity
+- Returns 404 status code for non-existent document IDs with logged attempt
+- Returns 403 status code for unauthorized metadata access with secure audit trail
+- Automated tests verify metadata accuracy against system records
 - Outcome focus for this story: The API exposes read-only access:.
 
 ## Technical Notes
-- Apply least-privilege authorization checks for the operational evidence path.
-- Ensure structured logs for the operational evidence path are queryable for compliance evidence.
+- Return metadata as JSON with standardized field names
+- Include SHA-256 checksum for document integrity verification
+- Log metadata access attempts separately from document content access
+- Implement caching for frequently accessed metadata with cache invalidation
+- Store metadata access logs with document ID, requesting actor, and response payload hash
 - Implementation should prioritize The API exposes read-only access:.
