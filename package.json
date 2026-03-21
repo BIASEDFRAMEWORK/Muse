@@ -19,13 +19,13 @@
     "node": ">=20"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.78.0",
+    "@anthropic-ai/sdk": "^0.80.0",
     "commander": "^14.0.1",
     "gray-matter": "^4.0.3",
     "yaml": "^2.8.1"
   },
   "devDependencies": {
-    "@types/node": "^25.3.5",
+    "@types/node": "^25.5.0",
     "markdownlint-cli": "^0.48.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.9.2"
