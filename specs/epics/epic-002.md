@@ -3,23 +3,30 @@ id: epic-002
 epic_id: epic-002
 capability: CAP-002
 derived_from_capability: CAP-002
-source: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
-source_path: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
+source: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
+source_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
 derived_from_document_id: gov-original-document-system-of-record
-origin_markdown_path: /home/runner/work/Muse/Muse/specs/governance/original-document-system-of-record.digital.md
+origin_markdown_path: /Users/dustingaspard/Documents/Excella/Workspace/Muse/specs/governance/original-document-system-of-record.digital.md
 ---
-# Service and API Governance
+# Immutable Document Storage Access Controls
 
 ## Capability
 Retention and Lifecycle Governance (CAP-002)
 
 ## Objective
-Deliver service and api governance capabilities from governance requirements.
+Establish authentication and authorization controls that prevent any document modification while enabling secure read access to authorized users
 
 ## Outcomes
-- Engineering teams can implement service and api governance with clear scope and ownership.
-- Controls are observable through logs, audits, and repeatable checks.
+- Authentication required for all document access endpoints
+- Role-based authorization controls document visibility
+- API blocks all HTTP methods except GET for document resources
+- Access logging captures all document retrieval attempts
+- Security headers prevent document tampering via client-side modifications
 - Primary outcome focus: The API exposes read-only access:.
 
 ## Non-Goals
-- Physical-only controls and manual paper handling processes are out of scope.
+- Document editing permissions or workflows
+- Collaborative document sharing features
+- Public or anonymous document access
+- Document versioning or revision tracking
+- Bulk document operations
