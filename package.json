@@ -19,7 +19,7 @@
     "node": ">=20"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.78.0",
+    "@anthropic-ai/sdk": "^0.80.0",
     "commander": "^14.0.1",
     "gray-matter": "^4.0.3",
     "yaml": "^2.8.1"
