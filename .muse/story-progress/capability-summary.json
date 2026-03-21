@@ -1,0 +1,21 @@
+{
+  "generated": "2026-03-21T02:11:43.610Z",
+  "capabilities": [
+    {
+      "id": "CAP-001",
+      "name": "CAP-001",
+      "status": "not-started",
+      "progress": 0,
+      "story_count": 3,
+      "archived_count": 0
+    },
+    {
+      "id": "CAP-002",
+      "name": "CAP-002",
+      "status": "not-started",
+      "progress": 0,
+      "story_count": 3,
+      "archived_count": 0
+    }
+  ]
+}

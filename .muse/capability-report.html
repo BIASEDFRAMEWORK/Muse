@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Capability Implementation Tracker</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f9fafb;
+      color: #1f2937;
+      line-height: 1.6;
+    }
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 40px 20px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1 { font-size: 28px; margin-bottom: 8px; }
+    .subtitle { font-size: 14px; opacity: 0.9; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin: 30px 0;
+    }
+    .stat-card {
+      background: white;
+      padding: 16px;
+      border-radius: 8px;
+      border-left: 4px solid #667eea;
+    }
+    .stat-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: #667eea;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+    .section { margin: 40px 0; }
+    .section h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #e5e7eb;
+    }
+    details summary { outline: none; }
+    details summary:hover { text-decoration: underline; }
+    .footer {
+      margin-top: 60px;
+      padding-top: 20px;
+      border-top: 1px solid #e5e7eb;
+      font-size: 12px;
+      color: #6b7280;
+    }
+    code {
+      background: #f3f4f6;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: monospace;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="container">
+      <h1>🎯 Capability Implementation Tracker</h1>
+      <div class="subtitle">Real-time progress dashboard for specification-driven development</div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat-card" style="border-left-color: #22c55e;">
+        <div class="stat-value" style="color: #22c55e;">0</div>
+        <div class="stat-label">Completed</div>
+      </div>
+      <div class="stat-card" style="border-left-color: #3b82f6;">
+        <div class="stat-value" style="color: #3b82f6;">0</div>
+        <div class="stat-label">In Progress</div>
+      </div>
+      <div class="stat-card" style="border-left-color: #f97316;">
+        <div class="stat-value" style="color: #f97316;">0</div>
+        <div class="stat-label">With PRs</div>
+      </div>
+      <div class="stat-card" style="border-left-color: #8b5cf6;">
+        <div class="stat-value" style="color: #8b5cf6;">2</div>
+        <div class="stat-label">Capabilities</div>
+      </div>
+    </div>
+
+    <!-- Capabilities Section -->
+    <div class="section">
+      <h2>Capabilities</h2>
+      
+        <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px; margin-bottom: 20px; background: #fafafa;">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
+            <div>
+              <h3 style="margin: 0 0 4px 0;">CAP-001: CAP-001</h3>
+              <small style="color: #6b7280;">3 stories • Status: <strong>not-started</strong></small>
+            </div>
+            <div style="font-size: 24px; font-weight: bold; color: #ef4444;">0%</div>
+          </div>
+          
+          
+    <div style="margin: 10px 0;">
+      <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+        <span>Overall Progress</span>
+        <span style="font-weight: bold; color: #ef4444;">0%</span>
+      </div>
+      <svg width="240" height="20" style="background: #f3f4f6; border-radius: 4px; overflow: hidden;">
+        <rect width="0" height="20" fill="#ef4444"/>
+      </svg>
+    </div>
+  
+          
+          <details style="margin-top: 12px;">
+            <summary style="cursor: pointer; color: #0066cc; margin-bottom: 8px;">Show stories (3)</summary>
+            <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb;">
+              
+                <div style="padding: 8px; margin-bottom: 8px; background: white; border-radius: 4px; border-left: 3px solid #ef4444;">
+                  <div style="font-size: 12px; color: #6b7280;">epic-001-feature-001-story-001</div>
+                  <div style="font-weight: 500; margin: 4px 0;">Stream Document Bytes via GET Endpoint</div>
+                  <div style="display: flex; gap: 12px; font-size: 12px; color: #6b7280;">
+                    <span>not-implemented</span>
+                    <span>PR: none</span>
+                    <span>0%</span>
+                  </div>
+                </div>
+              
+                <div style="padding: 8px; margin-bottom: 8px; background: white; border-radius: 4px; border-left: 3px solid #ef4444;">
+                  <div style="font-size: 12px; color: #6b7280;">epic-001-feature-001-story-002</div>
+                  <div style="font-weight: 500; margin: 4px 0;">Retrieve Document Metadata via GET Endpoint</div>
+                  <div style="display: flex; gap: 12px; font-size: 12px; color: #6b7280;">
+                    <span>not-implemented</span>
+                    <span>PR: none</span>
+                    <span>0%</span>
+                  </div>
+                </div>
+              
+                <div style="padding: 8px; margin-bottom: 8px; background: white; border-radius: 4px; border-left: 3px solid #ef4444;">
+                  <div style="font-size: 12px; color: #6b7280;">epic-001-feature-002-story-001</div>
+                  <div style="font-weight: 500; margin: 4px 0;">Document Metadata API — implementation path</div>
+                  <div style="display: flex; gap: 12px; font-size: 12px; color: #6b7280;">
+                    <span>not-implemented</span>
+                    <span>PR: none</span>
+                    <span>0%</span>
+                  </div>
+                </div>
+              
+            </div>
+          </details>
+        </div>
+      
+        <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px; margin-bottom: 20px; background: #fafafa;">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
+            <div>
+              <h3 style="margin: 0 0 4px 0;">CAP-002: CAP-002</h3>
+              <small style="color: #6b7280;">3 stories • Status: <strong>not-started</strong></small>
+            </div>
+            <div style="font-size: 24px; font-weight: bold; color: #ef4444;">0%</div>
+          </div>
+          
+          
+    <div style="margin: 10px 0;">
+      <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+        <span>Overall Progress</span>
+        <span style="font-weight: bold; color: #ef4444;">0%</span>
+      </div>
+      <svg width="240" height="20" style="background: #f3f4f6; border-radius: 4px; overflow: hidden;">
+        <rect width="0" height="20" fill="#ef4444"/>
+      </svg>
+    </div>
+  
+          
+          <details style="margin-top: 12px;">
+            <summary style="cursor: pointer; color: #0066cc; margin-bottom: 8px;">Show stories (3)</summary>
+            <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb;">
+              
+                <div style="padding: 8px; margin-bottom: 8px; background: white; border-radius: 4px; border-left: 3px solid #ef4444;">
+                  <div style="font-size: 12px; color: #6b7280;">epic-002-feature-001-story-001</div>
+                  <div style="font-weight: 500; margin: 4px 0;">Role-Based Document Access Control — implementation path</div>
+                  <div style="display: flex; gap: 12px; font-size: 12px; color: #6b7280;">
+                    <span>not-implemented</span>
+                    <span>PR: none</span>
+                    <span>0%</span>
+                  </div>
+                </div>
+              
+                <div style="padding: 8px; margin-bottom: 8px; background: white; border-radius: 4px; border-left: 3px solid #ef4444;">
+                  <div style="font-size: 12px; color: #6b7280;">epic-002-feature-001-story-002</div>
+                  <div style="font-weight: 500; margin: 4px 0;">Role-Based Document Access Control — operational evidence path</div>
+                  <div style="display: flex; gap: 12px; font-size: 12px; color: #6b7280;">
+                    <span>not-implemented</span>
+                    <span>PR: none</span>
+                    <span>0%</span>
+                  </div>
+                </div>
+              
+                <div style="padding: 8px; margin-bottom: 8px; background: white; border-radius: 4px; border-left: 3px solid #ef4444;">
+                  <div style="font-size: 12px; color: #6b7280;">epic-002-feature-002-story-001</div>
+                  <div style="font-weight: 500; margin: 4px 0;">Document Access Audit Trail — implementation path</div>
+                  <div style="display: flex; gap: 12px; font-size: 12px; color: #6b7280;">
+                    <span>not-implemented</span>
+                    <span>PR: none</span>
+                    <span>0%</span>
+                  </div>
+                </div>
+              
+            </div>
+          </details>
+        </div>
+      
+    </div>
+
+    <!-- Raw Data (for integrations) -->
+    <div class="section">
+      <h2>Raw Data</h2>
+      <details>
+        <summary style="color: #0066cc; cursor: pointer;">View JSON data (for API integrations)</summary>
+        <div style="margin-top: 12px; background: #f3f4f6; padding: 12px; border-radius: 4px; overflow: auto; max-height: 400px;">
+          <pre style="font-size: 11px; font-family: monospace; white-space: pre-wrap; word-wrap: break-word;">{
+  "generated": "2026-03-21T02:11:43.610Z",
+  "capabilities": [
+    {
+      "id": "CAP-001",
+      "name": "CAP-001",
+      "status": "not-started",
+      "progress": 0,
+      "story_count": 3,
+      "archived_count": 0
+    },
+    {
+      "id": "CAP-002",
+      "name": "CAP-002",
+      "status": "not-started",
+      "progress": 0,
+      "story_count": 3,
+      "archived_count": 0
+    }
+  ]
+}</pre>
+        </div>
+      </details>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p><strong>Generated:</strong> Mar 21, 2026, 02:11 AM</p>
+      <p><strong>Source:</strong> specs/stories/ (6 stories)</p>
+      <p><strong>Progress Bands:</strong> 0% = not-started | 1-49% = early-progress | 50-79% = late-progress | 80-99% = nearly-complete | 100% = complete</p>
+      <p>This report is auto-generated. Manual edits will be overwritten.</p>
+    </div>
+  </div>
+
+  <script>
+    // Embed capability summary for client-side queries
+    const CAPABILITY_DATA = {"generated":"2026-03-21T02:11:43.610Z","capabilities":[{"id":"CAP-001","name":"CAP-001","status":"not-started","progress":0,"story_count":3,"archived_count":0},{"id":"CAP-002","name":"CAP-002","status":"not-started","progress":0,"story_count":3,"archived_count":0}]};
+    const STORY_DATA = [{"id":"epic-001-feature-001-story-001","story_id":"epic-001-feature-001-story-001","name":"Stream Document Bytes via GET Endpoint","capability":"CAP-001","epic":"epic-001","feature":"epic-001-feature-001","related_pr":null,"pr_status":null,"implementation_status":"not-implemented","progress":0,"archived":false},{"id":"epic-001-feature-001-story-002","story_id":"epic-001-feature-001-story-002","name":"Retrieve Document Metadata via GET Endpoint","capability":"CAP-001","epic":"epic-001","feature":"epic-001-feature-001","related_pr":null,"pr_status":null,"implementation_status":"not-implemented","progress":0,"archived":false},{"id":"epic-001-feature-002-story-001","story_id":"epic-001-feature-002-story-001","name":"Document Metadata API — implementation path","capability":"CAP-001","epic":"epic-001","feature":"epic-001-feature-002","related_pr":null,"pr_status":null,"implementation_status":"not-implemented","progress":0,"archived":false},{"id":"epic-002-feature-001-story-001","story_id":"epic-002-feature-001-story-001","name":"Role-Based Document Access Control — implementation path","capability":"CAP-002","epic":"epic-002","feature":"epic-002-feature-001","related_pr":null,"pr_status":null,"implementation_status":"not-implemented","progress":0,"archived":false},{"id":"epic-002-feature-001-story-002","story_id":"epic-002-feature-001-story-002","name":"Role-Based Document Access Control — operational evidence path","capability":"CAP-002","epic":"epic-002","feature":"epic-002-feature-001","related_pr":null,"pr_status":null,"implementation_status":"not-implemented","progress":0,"archived":false},{"id":"epic-002-feature-002-story-001","story_id":"epic-002-feature-002-story-001","name":"Document Access Audit Trail — implementation path","capability":"CAP-002","epic":"epic-002","feature":"epic-002-feature-002","related_pr":null,"pr_status":null,"implementation_status":"not-implemented","progress":0,"archived":false}];
+  </script>
+</body>
+</html>
+    
