@@ -38,7 +38,6 @@ jobs:
           PR_NUMBER="${{ github.event.pull_request.number }}"
           PR_STATE="${{ github.event.pull_request.state }}"
           PR_DRAFT="${{ github.event.pull_request.draft }}"
-          PR_BODY="${{ github.event.pull_request.body }}"
           
           # Map PR state to pr_status: open|draft|review|approved|merged
           if [ "$PR_DRAFT" = "true" ]; then
@@ -51,7 +50,12 @@ jobs:
           
           echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
           echo "pr_status=$STATUS" >> $GITHUB_OUTPUT
-          echo "pr_body=$PR_BODY" >> $GITHUB_OUTPUT
+          
+          # Store PR body as multiline output (properly escaped)
+          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+          echo "pr_body<<$EOF" >> $GITHUB_OUTPUT
+          echo "${{ github.event.pull_request.body }}" >> $GITHUB_OUTPUT
+          echo "$EOF" >> $GITHUB_OUTPUT
 
       - name: Extract story ID from PR body
         id: story-link
