@@ -1,0 +1,126 @@
+name: Sync PR Status to Story Specs
+
+on:
+  pull_request:
+    types: [opened, synchronize, review_requested, ready_for_review, converted_to_draft]
+  pull_request_review:
+    types: [submitted, dismissed]
+  schedule:
+    - cron: '0 0 * * *'  # Daily sync at midnight UTC
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  sync-pr-status:
+    name: Update Story PR Status
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Get PR metadata
+        id: pr-meta
+        if: github.event_name != 'schedule'
+        run: |
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          PR_STATE="${{ github.event.pull_request.state }}"
+          PR_DRAFT="${{ github.event.pull_request.draft }}"
+          PR_BODY="${{ github.event.pull_request.body }}"
+          
+          # Map PR state to pr_status: open|draft|review|approved|merged
+          if [ "$PR_DRAFT" = "true" ]; then
+            STATUS="draft"
+          elif [ "$PR_STATE" = "open" ]; then
+            STATUS="open"
+          else
+            STATUS="closed"
+          fi
+          
+          echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
+          echo "pr_status=$STATUS" >> $GITHUB_OUTPUT
+          echo "pr_body=$PR_BODY" >> $GITHUB_OUTPUT
+
+      - name: Extract story ID from PR body
+        id: story-link
+        if: github.event_name != 'schedule'
+        run: |
+          # Look for pattern: "story: epic-001-feature-001-story-001" in PR body
+          STORY_ID=$(echo "${{ steps.pr-meta.outputs.pr_body }}" | \
+            grep -oP '(?<=story:\s)[a-z0-9\-]+' | head -1)
+          
+          if [ -z "$STORY_ID" ]; then
+            echo "No story link found in PR body"
+            echo "story_id=" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          echo "story_id=$STORY_ID" >> $GITHUB_OUTPUT
+
+      - name: Validate story frontmatter (fail if missing required fields)
+        if: github.event_name != 'schedule' && steps.story-link.outputs.story_id != ''
+        run: |
+          node scripts/validate-story-frontmatter.mjs \
+            --story-id "${{ steps.story-link.outputs.story_id }}" \
+            --fail-on-missing
+
+      - name: Update story PR status
+        if: github.event_name != 'schedule' && steps.story-link.outputs.story_id != ''
+        run: |
+          node scripts/update-story-pr-status.mjs \
+            --story-id "${{ steps.story-link.outputs.story_id }}" \
+            --pr "${{ steps.pr-meta.outputs.pr_number }}" \
+            --status "${{ steps.pr-meta.outputs.pr_status }}" \
+            --timestamp "$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+
+      - name: Analyze implementation (heuristic code scan)
+        if: github.event_name != 'schedule' && steps.story-link.outputs.story_id != ''
+        run: |
+          node scripts/analyze-implementation.mjs \
+            --story-id "${{ steps.story-link.outputs.story_id }}" \
+            --pr "${{ steps.pr-meta.outputs.pr_number }}"
+
+      - name: Run nightly sync for all stories
+        if: github.event_name == 'schedule'
+        run: |
+          node scripts/sync-all-pr-statuses.mjs
+
+      - name: Build capability caches
+        if: github.event_name != 'schedule'
+        run: |
+          node scripts/build-capability-caches.mjs
+
+      - name: Generate capability report
+        run: |
+          node scripts/generate-capability-report.mjs \
+            --output ".muse/capability-report.html"
+
+      - name: Commit changes
+        if: github.event_name != 'schedule'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(capability-tracker): sync PR status to stories [PR #${{ steps.pr-meta.outputs.pr_number }}]"
+          file_pattern: "specs/stories/*.md .muse/story-progress/*.json .muse/capability-report.html"
+          skip_fetch: false
+          skip_checkout: false
+
+      - name: Commit nightly sync
+        if: github.event_name == 'schedule'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(capability-tracker): nightly sync PR statuses"
+          file_pattern: "specs/stories/*.md .muse/story-progress/*.json .muse/capability-report.html"
+          skip_fetch: false
+          skip_checkout: false
