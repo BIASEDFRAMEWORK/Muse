@@ -22,7 +22,6 @@ function getArg(name) {
 }
 
 const STORY_ID = getArg('story-id');
-const PR_NUMBER = getArg('pr');
 
 /**
  * Extract key terms from story description/title
