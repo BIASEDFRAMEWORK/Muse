@@ -34,12 +34,11 @@ jobs:
       - name: Get PR metadata
         id: pr-meta
         if: github.event_name != 'schedule'
-        env:
-          PR_BODY: ${{ github.event.pull_request.body }}
         run: |
           PR_NUMBER="${{ github.event.pull_request.number }}"
           PR_STATE="${{ github.event.pull_request.state }}"
           PR_DRAFT="${{ github.event.pull_request.draft }}"
+          PR_BODY="$(node -e "const fs = require('fs'); const event = JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8')); process.stdout.write(event.pull_request?.body ?? '')")"
           
           # Map PR state to pr_status: open|draft|review|approved|merged
           if [ "$PR_DRAFT" = "true" ]; then
@@ -75,11 +74,16 @@ jobs:
           
           if [ -z "$STORY_ID" ]; then
             echo "No story link found in PR body"
-            echo "story_id=" >> "$GITHUB_OUTPUT"
+            OUTPUT_LINE="story_id="
+          else
+            OUTPUT_LINE="story_id=$STORY_ID"
+          fi
+
+          echo "$OUTPUT_LINE" >> "$GITHUB_OUTPUT"
+
+          if [ -z "$STORY_ID" ]; then
             exit 0
           fi
-          
-          echo "story_id=$STORY_ID" >> "$GITHUB_OUTPUT"
 
       - name: Validate story frontmatter (fail if missing required fields)
         if: github.event_name != 'schedule' && steps.story-link.outputs.story_id != ''
